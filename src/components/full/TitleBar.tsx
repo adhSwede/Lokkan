@@ -30,19 +30,19 @@ export const TitleBar = () => {
         <DarkModeSwitch />
         <button
           onClick={handleMinimize}
-          className="rounded p-1 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+          className="w-fit rounded p-1.5 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
         >
           <Minus className="pointer-events-none h-auto w-5" />
         </button>
         <button
           onClick={handleToggleMaximize}
-          className="rounded p-1 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+          className="w-fit rounded p-2 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
         >
           <Square className="pointer-events-none h-auto w-4" />
         </button>
         <button
           onClick={handleClose}
-          className="rounded p-1 transition-colors hover:bg-red-500 dark:hover:bg-red-600"
+          className="rounded p-1.5 transition-colors hover:bg-red-500 dark:hover:bg-red-600"
         >
           <X className="pointer-events-none h-auto w-5" />
         </button>

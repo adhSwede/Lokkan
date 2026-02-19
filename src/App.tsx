@@ -3,13 +3,12 @@ import { BoardListView } from "./views/BoardListView";
 
 export const App = () => {
   return (
-    <div className="flex h-full flex-col bg-white dark:bg-(--bg-dark)">
+    <div className="flex h-full w-full flex-col bg-white dark:bg-(--bg-dark)">
       <TitleBar />
-      <div>
-        {/* Views go here */}
-        <main className="flex">
-          <BoardListView />
-        </main>
+
+      {/* Views go here */}
+      <div className="p-3">
+        <BoardListView />
       </div>
     </div>
   );
