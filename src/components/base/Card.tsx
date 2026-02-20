@@ -11,7 +11,7 @@ export const Card = ({
   return (
     <div
       className={twMerge(
-        "flex rounded bg-indigo-300/60 dark:text-white",
+        "flex rounded-xs shadow-(--card-shadow) dark:text-white",
         className,
       )}
     >

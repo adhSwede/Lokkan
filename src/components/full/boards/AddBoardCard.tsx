@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card } from "../../base/Card";
 import { AddBoardButton } from "./AddBoardButton";
-import { EditBoardForm } from "./EditBoardForm";
+import { AddBoardForm } from "./AddBoardForm";
 
 export const AddBoardCard = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -9,7 +9,7 @@ export const AddBoardCard = () => {
   return (
     <Card className="w-full">
       {isEditing ? (
-        <EditBoardForm onToggle={() => setIsEditing(!isEditing)} />
+        <AddBoardForm onToggle={() => setIsEditing(!isEditing)} />
       ) : (
         <AddBoardButton onClick={() => setIsEditing(!isEditing)} />
       )}

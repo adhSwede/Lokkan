@@ -70,6 +70,17 @@ pub async fn get_column_by_id(pool: &SqlitePool, id: &str) -> Result<Column, Err
     Ok(column)
 }
 
+pub async fn get_columns_by_board_id(
+    pool: &SqlitePool,
+    board_id: &str,
+) -> Result<Vec<Column>, Error> {
+    let columns = sqlx::query_file_as!(Column, "src/queries/columns/get_by_board_id.sql", board_id)
+        .fetch_all(pool)
+        .await?;
+
+    Ok(columns)
+}
+
 // <================== Delete ==================>
 pub async fn delete_column(pool: &SqlitePool, id: &str) -> Result<Column, Error> {
     // Fetch first.

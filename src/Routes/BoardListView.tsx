@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { useBoards, useSetBoards, type Board } from "../stores/boardStore";
 import { BoardListItem } from "../components/full/boards/BoardListItem";
 import { AddBoardCard } from "../components/full/boards/AddBoardCard";
-import { Card } from "../components/base/Card";
 
 export const BoardListView = () => {
   const boards = useBoards();

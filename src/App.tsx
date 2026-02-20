@@ -1,14 +1,19 @@
+import { Route, Routes } from "react-router";
 import { TitleBar } from "./components/full/TitleBar";
-import { BoardListView } from "./views/BoardListView";
+import { BoardListView } from "./Routes/BoardListView";
+import { KanbanView } from "./Routes/KanbanView";
 
 export const App = () => {
   return (
-    <div className="flex h-full w-full flex-col bg-white dark:bg-(--bg-dark)">
+    <div className="flex h-full w-full flex-col bg-white dark:bg-(--bg-dark) dark:text-white">
       <TitleBar />
 
-      {/* Views go here */}
-      <div className="p-3">
-        <BoardListView />
+      <div className="h-full p-3">
+        <Routes>
+          {/* Views go here */}
+          <Route path="/" element={<BoardListView />} />
+          <Route path="/boards/:id" element={<KanbanView />} />
+        </Routes>
       </div>
     </div>
   );
