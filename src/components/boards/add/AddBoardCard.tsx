@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card } from "../../base/Card";
+import { Card } from "@components/base/Card";
 import { AddBoardButton } from "./AddBoardButton";
 import { AddBoardForm } from "./AddBoardForm";
 

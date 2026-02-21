@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { Card } from "@components/base/Card";
-import { AddColumnButton } from "./AddColumnButton";
-import { AddColumnForm } from "./AddColumnForm";
+import { AddTaskButton } from "./AddTaskButton";
+import { AddTaskForm } from "./AddTaskForm";
 
-export const AddColumnCard = ({ boardId }: { boardId: string }) => {
+export const AddTaskCard = ({ columnId }: { columnId: string }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
     <Card className="h-1/10 w-full">
       {isEditing ? (
-        <AddColumnForm
-          boardId={boardId}
+        <AddTaskForm
+          columnId={columnId}
           onToggle={() => setIsEditing(!isEditing)}
         />
       ) : (
-        <AddColumnButton onClick={() => setIsEditing(!isEditing)} />
+        <AddTaskButton onClick={() => setIsEditing(!isEditing)} />
       )}
     </Card>
   );

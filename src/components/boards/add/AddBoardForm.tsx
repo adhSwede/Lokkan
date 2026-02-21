@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { X } from "lucide-react";
 import React, { useRef, useEffect, useState } from "react";
-import { useAddBoard, type Board } from "../../../stores/boardStore";
+import { useAddBoard, type Board } from "@stores/boardStore";
 import { useNavigate } from "react-router";
 
 export const AddBoardForm = ({ onToggle }: { onToggle: () => void }) => {

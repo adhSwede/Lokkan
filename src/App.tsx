@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
-import { TitleBar } from "./components/TitleBar";
-import { BoardListView } from "./Routes/BoardListView";
-import { KanbanView } from "./Routes/KanbanView";
+import { TitleBar } from "@components/TitleBar";
+import { BoardListView } from "@routes/BoardListView";
+import { KanbanView } from "@routes/KanbanView";
 
 export const App = () => {
   return (

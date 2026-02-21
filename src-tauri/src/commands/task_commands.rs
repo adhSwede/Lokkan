@@ -59,6 +59,16 @@ pub async fn get_task_by_id(state: tauri::State<'_, AppState>, id: String) -> Re
         .map_err(|e| e.to_string())
 }
 
+#[tauri::command]
+pub async fn get_tasks_by_column_id(
+    state: tauri::State<'_, AppState>,
+    column_id: String,
+) -> Result<Vec<Task>, String> {
+    tasks::get_tasks_by_column_id(&state.pool, &column_id)
+        .await
+        .map_err(|e| e.to_string())
+}
+
 // <================== Delete ==================>
 #[tauri::command]
 pub async fn delete_task(state: tauri::State<'_, AppState>, id: String) -> Result<Task, String> {

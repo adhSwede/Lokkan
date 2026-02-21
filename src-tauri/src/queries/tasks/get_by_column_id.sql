@@ -1,12 +1,13 @@
--- get_by_board_id.sql
+-- get_by_column_id.sql
 SELECT
     id as "id!",
-    board_id as "board_id!",
-    name as "name!",
+    column_id as "column_id!",
+    title as "title!",
+    description,
     position as "position!",
     created_at as "created_at!",
     updated_at as "updated_at!"
 FROM
-    columns
+    tasks
 WHERE
-    board_id = ?
+    column_id = ?

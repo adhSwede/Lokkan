@@ -1,51 +1,38 @@
 import { create } from "zustand";
 
-// #[derive(Debug, Clone, Serialize, Deserialize, FromRow)]
-// pub struct Task {
-//     pub id: String,
-//     pub column_id: String,
-//     pub title: String,
-//     pub description: Option<String>,
-//     pub position: i64,
-//     pub created_at: String,
-//     pub updated_at: String,
-// }
+export interface Task {
+  id: string;
+  column_id: string;
+  title: string;
+  description: string;
+  position: number;
+  created_at: string;
+  updated_at: string;
+}
 
-// export interface Column {
-// id: string;
-// board_id: string;
-// name: string;
-// position: number;
-// created_at: string;
-// updated_at: string;
-// }
+interface TaskState {
+  // States
+  tasks: Task[];
 
-// interface ColumnState {
-// // States
-// columns: Column[];
+  // Setters
+  setTasks: (tasks: Task[]) => void;
+  addTask: (tasks: Task) => void;
+  deleteTask: (tasks: Task) => void;
+}
 
-// // Setters
-// setColumns: (columns: Column[]) => void;
-// addColumn: (columns: Column) => void;
-// deleteColumn: (columns: Column) => void;
-// }
+const useTaskStore = create<TaskState>((set) => ({
+  // States
+  tasks: [],
 
-// const useColumnStore = create<ColumnState>((set) => ({
-// // States
-// columns: [],
-// // Setters
-// setColumns: (columns) => set({ columns }),
-// addColumn: (column) =>
-// set((state) => ({ columns: [...state.columns, column] })),
-// deleteColumn: (column) =>
-// set((state) => ({
-//     columns: state.columns.filter((c) => c.id !== column.id),
-// })),
-// }));
+  // Setters
+  setTasks: (tasks) => set({ tasks }),
+  addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
+  deleteTask: (task) =>
+    set((state) => ({ tasks: state.tasks.filter((t) => t.id !== task.id) })),
+}));
 
 // // Custom hooks
-// export const useColumns = () => useColumnStore((state) => state.columns);
-// export const useSetColumns = () => useColumnStore((state) => state.setColumns);
-// export const useAddColumn = () => useColumnStore((state) => state.addColumn);
-// export const useDeleteColumn = () =>
-// useColumnStore((state) => state.deleteColumn);
+export const useTasks = () => useTaskStore((state) => state.tasks);
+export const useSetTasks = () => useTaskStore((state) => state.setTasks);
+export const useAddTask = () => useTaskStore((state) => state.addTask);
+export const deleteTask = () => useTaskStore((state) => state.deleteTask);

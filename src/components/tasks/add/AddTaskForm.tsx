@@ -1,18 +1,18 @@
+import { useAddTask, useTasks, type Task } from "@stores/taskStore";
 import { invoke } from "@tauri-apps/api/core";
 import { X } from "lucide-react";
-import React, { useRef, useEffect, useState } from "react";
-import { useAddColumn, useColumns, type Column } from "@stores/columnStore";
+import { useEffect, useRef, useState } from "react";
 
-export const AddColumnForm = ({
-  boardId,
+export const AddTaskForm = ({
+  columnId,
   onToggle,
 }: {
-  boardId: string;
+  columnId: string;
   onToggle: () => void;
 }) => {
   const inputField = useRef<HTMLInputElement>(null);
-  const addColumn = useAddColumn();
-  const columns = useColumns();
+  const addTask = useAddTask();
+  const tasks = useTasks();
 
   useEffect(() => {
     inputField.current?.focus();
@@ -23,13 +23,13 @@ export const AddColumnForm = ({
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const position = columns.length;
-      const column = await invoke<Column>("create_column", {
-        name: inputValue,
-        boardId,
+      const position = tasks.length;
+      const task = await invoke<Task>("create_task", {
+        title: inputValue,
+        columnId,
         position,
       });
-      addColumn(column);
+      addTask(task);
       onToggle();
     } catch (err) {
       console.log(err);

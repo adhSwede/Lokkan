@@ -1,8 +1,8 @@
 import { invoke } from "@tauri-apps/api/core";
 import { useEffect } from "react";
-import { useBoards, useSetBoards, type Board } from "../stores/boardStore";
-import { BoardElement } from "../components/boards/BoardElement";
-import { AddBoardCard } from "../components/boards/add/AddBoardCard";
+import { useBoards, useSetBoards, type Board } from "@stores/boardStore";
+import { BoardElement } from "@components/boards/BoardElement";
+import { AddBoardCard } from "@components/boards/add/AddBoardCard";
 
 export const BoardListView = () => {
   const boards = useBoards();
