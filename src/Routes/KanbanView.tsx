@@ -2,8 +2,8 @@ import { useParams } from "react-router";
 import { useColumns, useSetColumns, type Column } from "../stores/columnStore";
 import { useEffect } from "react";
 import { invoke } from "@tauri-apps/api/core";
-import { ColumnElement } from "../components/full/columns/ColumnElement";
-import { AddColumnCard } from "../components/full/columns/add/AddColumnCard";
+import { ColumnElement } from "../components/columns/ColumnElement";
+import { AddColumnCard } from "../components/columns/add/AddColumnCard";
 
 export const KanbanView = () => {
   const { id } = useParams();

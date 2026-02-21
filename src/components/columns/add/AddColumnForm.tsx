@@ -5,7 +5,7 @@ import {
   useAddColumn,
   useColumns,
   type Column,
-} from "../../../../stores/columnStore";
+} from "../../../stores/columnStore";
 
 export const AddColumnForm = ({
   boardId,

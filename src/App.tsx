@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router";
-import { TitleBar } from "./components/full/TitleBar";
+import { TitleBar } from "./components/TitleBar";
 import { BoardListView } from "./Routes/BoardListView";
 import { KanbanView } from "./Routes/KanbanView";
 

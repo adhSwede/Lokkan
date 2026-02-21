@@ -1,8 +1,8 @@
 import { invoke } from "@tauri-apps/api/core";
 import { useEffect } from "react";
 import { useBoards, useSetBoards, type Board } from "../stores/boardStore";
-import { BoardListItem } from "../components/full/boards/BoardListItem";
-import { AddBoardCard } from "../components/full/boards/AddBoardCard";
+import { BoardElement } from "../components/boards/BoardElement";
+import { AddBoardCard } from "../components/boards/add/AddBoardCard";
 
 export const BoardListView = () => {
   const boards = useBoards();
@@ -28,7 +28,7 @@ export const BoardListView = () => {
   return (
     <div className="grid grid-cols-5 gap-3">
       {boards.map((board) => (
-        <BoardListItem key={board.id} {...board} />
+        <BoardElement key={board.id} {...board} />
       ))}
       <AddBoardCard />
     </div>

@@ -1,18 +1,18 @@
 import { Trash2 } from "lucide-react";
-import { useDeleteBoard, type Board } from "../../../stores/boardStore";
-import { Card } from "../../base/Card";
+import { useDeleteBoard, type Board } from "../../stores/boardStore";
+import { Card } from "../base/Card";
 import { invoke } from "@tauri-apps/api/core";
 import { useNavigate } from "react-router";
 
-export const BoardListItem = ({ name, id }: Board) => {
+export const BoardElement = ({ name, id }: Board) => {
   const navigate = useNavigate();
   const deleteBoard = useDeleteBoard();
 
-  const deleteBoardItem = async (e: React.MouseEvent) => {
+  const deleteBoardElement = async (e: React.MouseEvent) => {
     e.stopPropagation();
 
     try {
-      const board = await invoke<Board>("delete_board", { id: id });
+      const board = await invoke<Board>("delete_board", { id });
       deleteBoard(board);
     } catch (err) {
       console.log(err);
@@ -28,7 +28,7 @@ export const BoardListItem = ({ name, id }: Board) => {
         <div className="flex flex-1 items-center">
           <h2 className="max-w-9/10 text-lg wrap-anywhere">{name}</h2>
           <button
-            onClick={(e) => deleteBoardItem(e)}
+            onClick={(e) => deleteBoardElement(e)}
             className="absolute top-2 right-2 flex w-fit cursor-pointer rounded p-1 hover:bg-red-500/50"
           >
             <Trash2 />
