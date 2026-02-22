@@ -1,0 +1,56 @@
+{
+  "db_name": "SQLite",
+  "query": "-- create.sql\r\nINSERT INTO\r\n    tasks (\r\n        id,\r\n        column_id,\r\n        title,\r\n        description,\r\n        position,\r\n        created_at,\r\n        updated_at\r\n    )\r\nVALUES\r\n    (?, ?, ?, ?, ?, ?, ?) RETURNING\r\n    id as \"id!\",\r\n    column_id as \"column_id!\",\r\n    title as \"title!\",\r\n    description,\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"\r\n",
+  "describe": {
+    "columns": [
+      {
+        "name": "id!",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "column_id!",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "title!",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "description",
+        "ordinal": 3,
+        "type_info": "Text"
+      },
+      {
+        "name": "position!",
+        "ordinal": 4,
+        "type_info": "Integer"
+      },
+      {
+        "name": "created_at!",
+        "ordinal": 5,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at!",
+        "ordinal": 6,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 7
+    },
+    "nullable": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "8d53ce685ec2096f8908cc59e73f6ef516f6e8e6b1b0a9800ffd9c082ac1b51c"
+}

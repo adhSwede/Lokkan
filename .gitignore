@@ -22,8 +22,6 @@ Thumbs.db
 *.temp
 
 # Editor directories and files
-.vscode/
-!.vscode/extensions.json
 .idea
 *.suo
 *.ntvs*
@@ -38,15 +36,11 @@ Thumbs.db
 
 # Rust/Tauri
 src-tauri/target/
-src-tauri/Cargo.lock
 
 # SQLite database files (user data)
 *.db
 *.db-shm
 *.db-wal
-
-# sqlx
-.sqlx/
 
 # Testing
 coverage/
