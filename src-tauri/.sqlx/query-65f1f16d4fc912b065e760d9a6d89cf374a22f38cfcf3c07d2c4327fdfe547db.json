@@ -1,0 +1,44 @@
+{
+  "db_name": "SQLite",
+  "query": "-- create.sql\r\nINSERT INTO\r\n    boards (id, name, description, created_at, updated_at)\r\nVALUES\r\n    (?, ?, ?, ?, ?) RETURNING\r\n    id as \"id!\",\r\n    name as \"name!\",\r\n    description,\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"\r\n",
+  "describe": {
+    "columns": [
+      {
+        "name": "id!",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "name!",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "description",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "created_at!",
+        "ordinal": 3,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at!",
+        "ordinal": 4,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 5
+    },
+    "nullable": [
+      true,
+      false,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "65f1f16d4fc912b065e760d9a6d89cf374a22f38cfcf3c07d2c4327fdfe547db"
+}

@@ -46,6 +46,16 @@ pub async fn get_column_by_id(
         .map_err(|e| e.to_string())
 }
 
+#[tauri::command]
+pub async fn get_columns_by_board_id(
+    state: tauri::State<'_, AppState>,
+    board_id: String,
+) -> Result<Vec<Column>, String> {
+    columns::get_columns_by_board_id(&state.pool, &board_id)
+        .await
+        .map_err(|e| e.to_string())
+}
+
 // <================== Delete ==================>
 #[tauri::command]
 pub async fn delete_column(

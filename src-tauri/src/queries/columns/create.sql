@@ -9,8 +9,7 @@ INSERT INTO
         updated_at
     )
 VALUES
-    (?, ?, ?, ?, ?, ?) RETURNING
-    id as "id!",
+    (?, ?, ?, ?, ?, ?) RETURNING id as "id!",
     board_id as "board_id!",
     name as "name!",
     position as "position!",

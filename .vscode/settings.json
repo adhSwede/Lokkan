@@ -1,0 +1,11 @@
+{
+    "cSpell.words": [
+        "chrono",
+        "dotenvy",
+        "reqwest",
+        "serde",
+        "sqlx",
+        "tauri"
+    ],
+    "editor.fontLigatures": true,
+}

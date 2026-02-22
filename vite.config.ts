@@ -1,13 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import tailwindcss from "@tailwindcss/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 const host = process.env.TAURI_DEV_HOST;
 
 export default defineConfig({
   // prevent vite from obscuring rust errors
   clearScreen: false,
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), tsconfigPaths()],
   server: {
     // make sure this port matches the devUrl port in tauri.conf.json file
     port: 5173,

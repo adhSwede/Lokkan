@@ -76,6 +76,17 @@ pub async fn get_task_by_id(pool: &SqlitePool, id: &str) -> Result<Task, Error> 
     Ok(task)
 }
 
+pub async fn get_tasks_by_column_id(
+    pool: &SqlitePool,
+    column_id: &str,
+) -> Result<Vec<Task>, Error> {
+    let tasks = sqlx::query_file_as!(Task, "src/queries/tasks/get_by_column_id.sql", column_id)
+        .fetch_all(pool)
+        .await?;
+
+    Ok(tasks)
+}
+
 // <================== Delete ==================>
 pub async fn delete_task(pool: &SqlitePool, id: &str) -> Result<Task, Error> {
     // Fetch first.
