@@ -25,7 +25,10 @@ const useTaskStore = create<TaskState>((set) => ({
   tasks: [],
 
   // Setters
-  setTasks: (tasks) => set({ tasks }),
+  setTasks: (tasks) =>
+    set((state) => ({
+      tasks: [...state.tasks.filter((t) => t.column_id !== tasks[0]?.column_id), ...tasks],
+    })),
   addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
   deleteTask: (task) =>
     set((state) => ({ tasks: state.tasks.filter((t) => t.id !== task.id) })),
