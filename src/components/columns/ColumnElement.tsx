@@ -13,7 +13,7 @@ export const ColumnElement = ({ name, id }: Column) => {
   const tasks = useTasks();
   const setTasks = useSetTasks();
 
-  (useEffect(() => {
+  useEffect(() => {
     const loadTasks = async () => {
       try {
         const fetchedTasks = await invoke<Task[]>("get_tasks_by_column_id", {
@@ -31,8 +31,7 @@ export const ColumnElement = ({ name, id }: Column) => {
     };
 
     loadTasks();
-  }),
-    [id, setTasks]);
+  }, [id, setTasks]);
 
   const deleteColumnElement = async (e: React.MouseEvent) => {
     e.stopPropagation();
