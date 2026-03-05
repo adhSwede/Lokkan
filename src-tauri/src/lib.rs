@@ -66,6 +66,7 @@ pub fn run() {
             commands::task_commands::update_task,
             commands::task_commands::get_all_tasks,
             commands::task_commands::get_task_by_id,
+            commands::task_commands::get_tasks_by_column_id,
             commands::task_commands::delete_task,
         ])
         .run(tauri::generate_context!())

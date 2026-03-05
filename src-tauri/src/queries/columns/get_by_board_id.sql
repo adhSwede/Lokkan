@@ -10,3 +10,4 @@ FROM
     columns
 WHERE
     board_id = ?
+ORDER BY position ASC
