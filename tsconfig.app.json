@@ -27,9 +27,14 @@
     /* Paths */
     "baseUrl": ".",
     "paths": {
+      "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
+      "@css/*": ["src/css/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@queries/*": ["src/queries/*"],
+      "@routes/*": ["src/routes/*"],
       "@stores/*": ["src/stores/*"],
-      "@routes/*": ["src/routes/*"]
+      "@t/*": ["src/types/*"]
     }
   },
   "include": ["src"]

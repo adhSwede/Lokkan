@@ -1,12 +1,5 @@
+import type { Board } from "@t/Board";
 import { create } from "zustand";
-
-export interface Board {
-  id: string;
-  name: string;
-  description?: string;
-  created_at: string;
-  updated_at: string;
-}
 
 interface BoardState {
   // States

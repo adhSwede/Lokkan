@@ -1,14 +1,5 @@
+import type { Task } from "@t/Task";
 import { create } from "zustand";
-
-export interface Task {
-  id: string;
-  column_id: string;
-  title: string;
-  description: string;
-  position: number;
-  created_at: string;
-  updated_at: string;
-}
 
 interface TaskState {
   // States
@@ -27,7 +18,10 @@ const useTaskStore = create<TaskState>((set) => ({
   // Setters
   setTasks: (tasks) =>
     set((state) => ({
-      tasks: [...state.tasks.filter((t) => t.column_id !== tasks[0]?.column_id), ...tasks],
+      tasks: [
+        ...state.tasks.filter((t) => t.column_id !== tasks[0]?.column_id),
+        ...tasks,
+      ],
     })),
   addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
   deleteTask: (task) =>

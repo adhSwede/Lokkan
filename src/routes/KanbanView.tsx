@@ -1,38 +1,23 @@
 import { useParams } from "react-router";
-import { useColumns, useSetColumns, useReorderColumns, type Column } from "@stores/columnStore";
-import { useEffect, useRef } from "react";
-import { invoke } from "@tauri-apps/api/core";
+import { useColumns, useReorderColumns } from "@stores/columnStore";
+import { useRef } from "react";
 import { ColumnElement } from "@components/columns/ColumnElement";
 import { AddColumnCard } from "@components/columns/add/AddColumnCard";
-import { DragDropProvider, type DragEndEvent, type DragStartEvent } from "@dnd-kit/react";
+import {
+  DragDropProvider,
+  type DragEndEvent,
+  type DragStartEvent,
+} from "@dnd-kit/react";
 import { Sortable } from "@components/base/Sortable";
+import { useGetColsByBoardId } from "@hooks/columnHooks";
 
 export const KanbanView = () => {
   const { id } = useParams();
   const columns = useColumns();
-  const setColumns = useSetColumns();
   const reorderColumns = useReorderColumns();
   const dragStartIndex = useRef<number | null>(null);
 
-  useEffect(() => {
-    const loadColumns = async () => {
-      try {
-        const fetchedColumns = await invoke<Column[]>(
-          "get_columns_by_board_id",
-          { boardId: id },
-        );
-        if (Array.isArray(fetchedColumns)) {
-          setColumns(fetchedColumns);
-        } else {
-          console.log("Invalid columns data.");
-        }
-      } catch (err) {
-        console.error("Error fetching columns:", err);
-      }
-    };
-
-    loadColumns();
-  }, [id, setColumns]);
+  useGetColsByBoardId(id);
 
   const handleDragStart: DragStartEvent = (event) => {
     const source = event.operation.source as { index: number } | null;
