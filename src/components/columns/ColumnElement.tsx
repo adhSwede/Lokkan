@@ -1,11 +1,13 @@
 import { invoke } from "@tauri-apps/api/core";
-import { useDeleteColumn, type Column } from "@stores/columnStore";
+import { useDeleteColumn } from "@stores/columnStore";
 import { Card } from "@components/base/Card";
 import { Trash2 } from "lucide-react";
-import { useSetTasks, useTasks, type Task } from "@stores/taskStore";
+import { useSetTasks, useTasks } from "@stores/taskStore";
 import { useEffect } from "react";
 import { TaskElement } from "@components/tasks/TaskElement";
 import { AddTaskCard } from "@components/tasks/add/AddTaskCard";
+import type { Column } from "@t/Column";
+import type { Task } from "@t/Task";
 
 export const ColumnElement = ({ name, id }: Column) => {
   const deleteColumn = useDeleteColumn();

@@ -1,7 +1,8 @@
 import { invoke } from "@tauri-apps/api/core";
-import { deleteTask, type Task } from "@stores/taskStore";
+import { deleteTask } from "@stores/taskStore";
 import { Card } from "@components/base/Card";
 import { Trash2 } from "lucide-react";
+import type { Task } from "@t/Task";
 
 export const TaskElement = ({ title, id }: Task) => {
   const deleteTaskFromStore = deleteTask();
