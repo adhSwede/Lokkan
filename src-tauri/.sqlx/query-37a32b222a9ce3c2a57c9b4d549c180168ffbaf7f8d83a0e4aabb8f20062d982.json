@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "-- delete.sql\nDELETE FROM boards\nWHERE\n    id = ?",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": []
+  },
+  "hash": "37a32b222a9ce3c2a57c9b4d549c180168ffbaf7f8d83a0e4aabb8f20062d982"
+}

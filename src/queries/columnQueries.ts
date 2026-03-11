@@ -15,3 +15,11 @@ export const getColumnsByBoardId = async (boardId: string) => {
     console.error("Error fetching columns:", err);
   }
 };
+
+export const reorderColumn = async (id: string, position: number) => {
+  try {
+    return await invoke<Column>("reorder_column", { id, position });
+  } catch (err) {
+    console.error("Error reordering column:", err);
+  }
+};

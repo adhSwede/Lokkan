@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useColumns, useReorderColumns } from "@stores/columnStore";
+import { useColumns } from "@stores/columnStore";
 import { useRef } from "react";
 import { ColumnElement } from "@components/columns/ColumnElement";
 import { AddColumnCard } from "@components/columns/add/AddColumnCard";
@@ -9,7 +9,7 @@ import {
   type DragOverEvent,
   type DragStartEvent,
 } from "@dnd-kit/react";
-import { useGetColsByBoardId } from "@hooks/columnHooks";
+import { useGetColsByBoardId, useReorderColumns } from "@hooks/columnHooks";
 import { ColumnSortable } from "@components/columns/ColumnSortable";
 
 export const KanbanView = () => {
@@ -27,16 +27,23 @@ export const KanbanView = () => {
   };
 
   const handleDragOver: DragOverEvent = (event) => {
-    const lastDraggedOver = event.operation.target as { index: number } | null;
-    dragOverIndex.current = lastDraggedOver?.index ?? null;
+    const target = event.operation.target;
+    if (!target) return;
+    const idx = columns.findIndex((c) => c.id === target.id);
+    if (idx !== -1) dragOverIndex.current = idx;
   };
 
   const handleDragEnd: DragEndEvent = (event) => {
-    if (event.canceled || dragStartIndex.current === null) return;
-    const target = event.operation.target as { index: number } | null;
-    if (!target || dragStartIndex.current === target.index) return;
-    reorderColumns(dragStartIndex.current, target.index);
+    if (
+      event.canceled ||
+      dragStartIndex.current === null ||
+      dragOverIndex.current === null
+    )
+      return;
+    if (dragStartIndex.current === dragOverIndex.current) return;
+    reorderColumns(dragStartIndex.current, dragOverIndex.current);
     dragStartIndex.current = null;
+    dragOverIndex.current = null;
   };
 
   return (

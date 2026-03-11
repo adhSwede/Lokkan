@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "-- update.sql\r\nUPDATE boards\r\nSET\r\n    name = ?,\r\n    description = ?,\r\n    updated_at = ?\r\nWHERE\r\n    id = ? RETURNING\r\n    id as \"id!\",\r\n    name as \"name!\",\r\n    description,\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"\r\n",
+  "query": "-- create.sql\nINSERT INTO\n    boards (id, name, description, created_at, updated_at)\nVALUES\n    (?, ?, ?, ?, ?) RETURNING\n    id as \"id!\",\n    name as \"name!\",\n    description,\n    created_at as \"created_at!\",\n    updated_at as \"updated_at!\"\n",
   "describe": {
     "columns": [
       {
@@ -30,7 +30,7 @@
       }
     ],
     "parameters": {
-      "Right": 4
+      "Right": 5
     },
     "nullable": [
       true,
@@ -40,5 +40,5 @@
       false
     ]
   },
-  "hash": "57b1d041b01194e1441737e66e10df88b042bf0711caa58e572fdcb8449c3c3f"
+  "hash": "703ab1b72fa0891a714be37ca4a297471d54564a4cccdd62277a9ae7b23c0fc4"
 }

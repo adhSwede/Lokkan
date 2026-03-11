@@ -28,6 +28,17 @@ pub async fn update_column(
         .map_err(|e| e.to_string())
 }
 
+#[tauri::command]
+pub async fn reorder_column(
+    state: tauri::State<'_, AppState>,
+    id: String,
+    position: i64,
+) -> Result<Column, String> {
+    columns::reorder_column(&state.pool, &id, position)
+        .await
+        .map_err(|e| e.to_string())
+}
+
 // <================== Get ==================>
 #[tauri::command]
 pub async fn get_all_columns(state: tauri::State<'_, AppState>) -> Result<Vec<Column>, String> {

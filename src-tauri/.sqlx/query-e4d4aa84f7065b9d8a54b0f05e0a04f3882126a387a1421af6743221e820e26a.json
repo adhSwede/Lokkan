@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "-- get_by_column_id.sql\r\nSELECT\r\n    id as \"id!\",\r\n    column_id as \"column_id!\",\r\n    title as \"title!\",\r\n    description,\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"\r\nFROM\r\n    tasks\r\nWHERE\r\n    column_id = ?",
+  "query": "-- update.sql\nUPDATE tasks\nSET\n    column_id = ?,\n    title = ?,\n    description = ?,\n    position = ?,\n    updated_at = ?\nWHERE\n    id = ? RETURNING\n    id as \"id!\",\n    column_id as \"column_id!\",\n    title as \"title!\",\n    description,\n    position as \"position!\",\n    created_at as \"created_at!\",\n    updated_at as \"updated_at!\"\n",
   "describe": {
     "columns": [
       {
@@ -40,7 +40,7 @@
       }
     ],
     "parameters": {
-      "Right": 1
+      "Right": 6
     },
     "nullable": [
       true,
@@ -52,5 +52,5 @@
       false
     ]
   },
-  "hash": "4e360471c142737c49ba48937f6f835f13514a0407ef882837a2af867aea59d8"
+  "hash": "e4d4aa84f7065b9d8a54b0f05e0a04f3882126a387a1421af6743221e820e26a"
 }

@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { invoke } from "@tauri-apps/api/core";
 import type { Column } from "@t/Column";
 
 interface ColumnState {
@@ -18,19 +17,19 @@ const useColumnStore = create<ColumnState>((set) => ({
   columns: [],
   // Setters
   setColumns: (columns) => set({ columns }),
+
   addColumn: (column) =>
     set((state) => ({ columns: [...state.columns, column] })),
+
   deleteColumn: (column) =>
     set((state) => ({
       columns: state.columns.filter((c) => c.id !== column.id),
     })),
+
   reorderColumns: (from, to) =>
     set((state) => {
       const reordered = [...state.columns];
       reordered.splice(to, 0, reordered.splice(from, 1)[0]);
-      reordered.forEach((col, i) =>
-        invoke("update_column", { id: col.id, name: col.name, position: i }),
-      );
       return { columns: reordered };
     }),
 }));

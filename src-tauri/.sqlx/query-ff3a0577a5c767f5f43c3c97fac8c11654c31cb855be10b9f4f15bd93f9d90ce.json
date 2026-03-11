@@ -1,0 +1,12 @@
+{
+  "db_name": "SQLite",
+  "query": "-- delete.sql\nDELETE FROM tasks\nWHERE\n    id = ?",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": []
+  },
+  "hash": "ff3a0577a5c767f5f43c3c97fac8c11654c31cb855be10b9f4f15bd93f9d90ce"
+}

@@ -57,6 +57,7 @@ pub fn run() {
             // <== Columns ==>
             commands::column_commands::create_column,
             commands::column_commands::update_column,
+            commands::column_commands::reorder_column,
             commands::column_commands::get_all_columns,
             commands::column_commands::get_columns_by_board_id,
             commands::column_commands::get_column_by_id,

@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "-- get_all.sql\r\nSELECT\r\n    id as \"id!\",\r\n    column_id as \"column_id!\",\r\n    title as \"title!\",\r\n    description,\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"\r\nFROM\r\n    tasks\r\n",
+  "query": "-- create.sql\nINSERT INTO\n    columns (\n        id,\n        board_id,\n        name,\n        position,\n        created_at,\n        updated_at\n    )\nVALUES\n    (?, ?, ?, ?, ?, ?) RETURNING id as \"id!\",\n    board_id as \"board_id!\",\n    name as \"name!\",\n    position as \"position!\",\n    created_at as \"created_at!\",\n    updated_at as \"updated_at!\"",
   "describe": {
     "columns": [
       {
@@ -9,48 +9,42 @@
         "type_info": "Text"
       },
       {
-        "name": "column_id!",
+        "name": "board_id!",
         "ordinal": 1,
         "type_info": "Text"
       },
       {
-        "name": "title!",
+        "name": "name!",
         "ordinal": 2,
         "type_info": "Text"
       },
       {
-        "name": "description",
-        "ordinal": 3,
-        "type_info": "Text"
-      },
-      {
         "name": "position!",
-        "ordinal": 4,
+        "ordinal": 3,
         "type_info": "Integer"
       },
       {
         "name": "created_at!",
-        "ordinal": 5,
+        "ordinal": 4,
         "type_info": "Text"
       },
       {
         "name": "updated_at!",
-        "ordinal": 6,
+        "ordinal": 5,
         "type_info": "Text"
       }
     ],
     "parameters": {
-      "Right": 0
+      "Right": 6
     },
     "nullable": [
       true,
       false,
       false,
-      true,
       false,
       false,
       false
     ]
   },
-  "hash": "72a5b3dc5fba5208fd6fa701934c32169d548db452a76130c0018191766148c8"
+  "hash": "eeceaafb7a7c06baf57a3e3816aac6157b04de57d7024cf0c57ab92472e20bed"
 }
