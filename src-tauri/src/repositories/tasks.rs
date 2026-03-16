@@ -91,12 +91,7 @@ pub async fn get_all_tasks(pool: &SqlitePool) -> Result<Vec<Task>, Error> {
     Ok(tasks)
 }
 
-pub async fn get_task_by_id(
-    pool: &SqlitePool,
-    id: &str,
-    column_id: &str,
-    position: i64,
-) -> Result<Task, Error> {
+pub async fn get_task_by_id(pool: &SqlitePool, id: &str) -> Result<Task, Error> {
     let task = sqlx::query_file_as!(Task, "src/queries/tasks/get_by_id.sql", id)
         .fetch_one(pool)
         .await?;
