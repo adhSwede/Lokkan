@@ -5,7 +5,6 @@ import { Trash2 } from "lucide-react";
 import { useTasks } from "@stores/taskStore";
 import { AddTaskCard } from "@components/tasks/add/AddTaskCard";
 import type { Column } from "@t/Column";
-import { DragDropProvider } from "@dnd-kit/react";
 import { TaskSortable } from "@components/tasks/TaskSortable";
 import { useGetTasksByColumnId } from "@hooks/taskHooks";
 import { TaskElement } from "@components/tasks/TaskElement";
@@ -40,20 +39,13 @@ export const ColumnElement = ({ name, id }: Column) => {
           </button>
         </div>
         <div className="h-full w-full rounded shadow-(--card-shadow)">
-          <DragDropProvider>
-            {tasks
-              .filter((t) => t.column_id === id)
-              .map((task, index) => (
-                <TaskSortable
-                  key={task.id}
-                  id={task.id}
-                  index={index}
-                  group={id}
-                >
-                  <TaskElement {...task} />
-                </TaskSortable>
-              ))}
-          </DragDropProvider>
+          {tasks
+            .filter((t) => t.column_id === id)
+            .map((task, index) => (
+              <TaskSortable key={task.id} id={task.id} index={index} group={id}>
+                <TaskElement {...task} />
+              </TaskSortable>
+            ))}
           {id && <AddTaskCard columnId={id} />}
         </div>
       </div>
