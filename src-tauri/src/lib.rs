@@ -65,6 +65,7 @@ pub fn run() {
             // <== Tasks ==>
             commands::task_commands::create_task,
             commands::task_commands::update_task,
+            commands::task_commands::reorder_task,
             commands::task_commands::get_all_tasks,
             commands::task_commands::get_task_by_id,
             commands::task_commands::get_tasks_by_column_id,

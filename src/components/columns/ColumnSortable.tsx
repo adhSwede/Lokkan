@@ -1,24 +1,23 @@
-import { useDroppable } from "@dnd-kit/react";
 import { useSortable } from "@dnd-kit/react/sortable";
 import type { ReactNode } from "react";
-import { useCombinedRefs } from "@dnd-kit/utilities";
 
 export const ColumnSortable = ({
   id,
   index,
   children,
+  group,
 }: {
   id: string;
   index: number;
   children: ReactNode;
+  group: string;
 }) => {
-  const { ref: sortableRef } = useSortable({ id, index, type: "Column" });
-  const { ref: droppableRef } = useDroppable({
+  const { ref: sortableRef } = useSortable({
     id,
-    collisionPriority: 0,
+    index,
+    type: "Column",
+    group,
   });
 
-  const combinedRef = useCombinedRefs(sortableRef, droppableRef);
-
-  return <div ref={combinedRef}>{children}</div>;
+  return <div ref={sortableRef}>{children}</div>;
 };

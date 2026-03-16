@@ -2,38 +2,19 @@ import { invoke } from "@tauri-apps/api/core";
 import { useDeleteColumn } from "@stores/columnStore";
 import { Card } from "@components/base/Card";
 import { Trash2 } from "lucide-react";
-import { useSetTasks, useTasks } from "@stores/taskStore";
-import { useEffect } from "react";
-import { TaskElement } from "@components/tasks/TaskElement";
+import { useTasks } from "@stores/taskStore";
 import { AddTaskCard } from "@components/tasks/add/AddTaskCard";
 import type { Column } from "@t/Column";
-import type { Task } from "@t/Task";
+import { DragDropProvider } from "@dnd-kit/react";
+import { TaskSortable } from "@components/tasks/TaskSortable";
+import { useGetTasksByColumnId } from "@hooks/taskHooks";
+import { TaskElement } from "@components/tasks/TaskElement";
 
 export const ColumnElement = ({ name, id }: Column) => {
   const deleteColumn = useDeleteColumn();
-
   const tasks = useTasks();
-  const setTasks = useSetTasks();
 
-  useEffect(() => {
-    const loadTasks = async () => {
-      try {
-        const fetchedTasks = await invoke<Task[]>("get_tasks_by_column_id", {
-          columnId: id,
-        });
-
-        if (Array.isArray(fetchedTasks)) {
-          setTasks(fetchedTasks);
-        } else {
-          console.log("Invalid tasks data.");
-        }
-      } catch (err) {
-        console.log("Error fetching tasks:", err);
-      }
-    };
-
-    loadTasks();
-  }, [id, setTasks]);
+  useGetTasksByColumnId(id);
 
   const deleteColumnElement = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -59,11 +40,20 @@ export const ColumnElement = ({ name, id }: Column) => {
           </button>
         </div>
         <div className="h-full w-full rounded shadow-(--card-shadow)">
-          {tasks
-            .filter((task) => task.column_id === id)
-            .map((task) => (
-              <TaskElement key={task.id} {...task} />
-            ))}
+          <DragDropProvider>
+            {tasks
+              .filter((t) => t.column_id === id)
+              .map((task, index) => (
+                <TaskSortable
+                  key={task.id}
+                  id={task.id}
+                  index={index}
+                  group={id}
+                >
+                  <TaskElement {...task} />
+                </TaskSortable>
+              ))}
+          </DragDropProvider>
           {id && <AddTaskCard columnId={id} />}
         </div>
       </div>

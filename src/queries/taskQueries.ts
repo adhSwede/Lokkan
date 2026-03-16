@@ -16,3 +16,11 @@ export const getTasksByColumnId = async (columnId: string) => {
     console.log("Error fetching tasks:", err);
   }
 };
+
+export const reorderTask = async (id: string, position: number) => {
+  try {
+    return await invoke<Task>("reorder_task", { id, position });
+  } catch (err) {
+    console.error("Error reordering task:", err);
+  }
+};

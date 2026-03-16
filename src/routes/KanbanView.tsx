@@ -14,6 +14,8 @@ import { ColumnSortable } from "@components/columns/ColumnSortable";
 
 export const KanbanView = () => {
   const { id } = useParams();
+  if (!id) return null;
+
   const columns = useColumns();
   const reorderColumns = useReorderColumns();
   const dragStartIndex = useRef<number | null>(null);
@@ -54,12 +56,17 @@ export const KanbanView = () => {
         onDragEnd={handleDragEnd}
       >
         {columns.map((column, index) => (
-          <ColumnSortable key={column.id} id={column.id} index={index}>
+          <ColumnSortable
+            key={column.id}
+            id={column.id}
+            index={index}
+            group={id}
+          >
             <ColumnElement {...column} />
           </ColumnSortable>
         ))}
       </DragDropProvider>
-      {id && <AddColumnCard boardId={id} />}
+      <AddColumnCard boardId={id} />
     </div>
   );
 };

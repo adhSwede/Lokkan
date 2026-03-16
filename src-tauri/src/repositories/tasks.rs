@@ -59,6 +59,29 @@ pub async fn update_task(
     Ok(task)
 }
 
+pub async fn reorder_task(
+    pool: &SqlitePool,
+    id: &str,
+    column_id: &str,
+    position: i64,
+) -> Result<Task, Error> {
+    let now = chrono::Utc::now().to_rfc3339();
+
+    let task = sqlx::query_file_as!(
+        Task,
+        "src/queries/tasks/reorder.sql",
+        id,
+        column_id,
+        position,
+        now
+    )
+    .fetch_one(pool)
+    .await?;
+
+    println!("✓ Task updated.");
+    Ok(task)
+}
+
 // <================== Get ==================>
 pub async fn get_all_tasks(pool: &SqlitePool) -> Result<Vec<Task>, Error> {
     let tasks = sqlx::query_file_as!(Task, "src/queries/tasks/get_all.sql")
@@ -68,7 +91,12 @@ pub async fn get_all_tasks(pool: &SqlitePool) -> Result<Vec<Task>, Error> {
     Ok(tasks)
 }
 
-pub async fn get_task_by_id(pool: &SqlitePool, id: &str) -> Result<Task, Error> {
+pub async fn get_task_by_id(
+    pool: &SqlitePool,
+    id: &str,
+    column_id: &str,
+    position: i64,
+) -> Result<Task, Error> {
     let task = sqlx::query_file_as!(Task, "src/queries/tasks/get_by_id.sql", id)
         .fetch_one(pool)
         .await?;
