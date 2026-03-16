@@ -7,54 +7,40 @@ import {
   DragDropProvider,
   type DragEndEvent,
   type DragOverEvent,
-  type DragStartEvent,
 } from "@dnd-kit/react";
 import { useGetColsByBoardId, useReorderColumns } from "@hooks/columnHooks";
 import { ColumnSortable } from "@components/columns/ColumnSortable";
 
 export const KanbanView = () => {
   const { id } = useParams();
-  if (!id) return null;
-
   const columns = useColumns();
   const reorderColumns = useReorderColumns();
-  const dragStartIndex = useRef<number | null>(null);
-  const dragOverIndex = useRef<number | null>(null);
+  const lastOverId = useRef<string | null>(null);
 
   useGetColsByBoardId(id);
 
-  const handleDragStart: DragStartEvent = (event) => {
-    const source = event.operation.source as { index: number } | null;
-    dragStartIndex.current = source?.index ?? null;
-  };
+  if (!id) return null;
 
   const handleDragOver: DragOverEvent = (event) => {
     const target = event.operation.target;
-    if (!target) return;
-    const idx = columns.findIndex((c) => c.id === target.id);
-    if (idx !== -1) dragOverIndex.current = idx;
+    if (!target || target.id === event.operation.source?.id) return;
+    lastOverId.current = target.id as string;
   };
 
   const handleDragEnd: DragEndEvent = (event) => {
-    if (
-      event.canceled ||
-      dragStartIndex.current === null ||
-      dragOverIndex.current === null
-    )
-      return;
-    if (dragStartIndex.current === dragOverIndex.current) return;
-    reorderColumns(dragStartIndex.current, dragOverIndex.current);
-    dragStartIndex.current = null;
-    dragOverIndex.current = null;
+    if (event.canceled || !lastOverId.current) return;
+    const source = event.operation.source;
+    if (!source || source.id === lastOverId.current) return;
+    const from = columns.findIndex((c) => c.id === source.id);
+    const to = columns.findIndex((c) => c.id === lastOverId.current);
+    lastOverId.current = null;
+    if (from === -1 || to === -1 || from === to) return;
+    reorderColumns(from, to);
   };
 
   return (
     <div className="grid h-full grid-cols-5 grid-rows-1 gap-3">
-      <DragDropProvider
-        onDragStart={handleDragStart}
-        onDragOver={handleDragOver}
-        onDragEnd={handleDragEnd}
-      >
+      <DragDropProvider onDragOver={handleDragOver} onDragEnd={handleDragEnd}>
         {columns.map((column, index) => (
           <ColumnSortable
             key={column.id}

@@ -12,12 +12,7 @@ export const ColumnSortable = ({
   children: ReactNode;
   group: string;
 }) => {
-  const { ref: sortableRef } = useSortable({
-    id,
-    index,
-    type: "Column",
-    group,
-  });
+  const { ref } = useSortable({ id, index, type: "Column", group });
 
-  return <div ref={sortableRef}>{children}</div>;
+  return <div ref={ref}>{children}</div>;
 };
