@@ -23,3 +23,11 @@ export const reorderColumn = async (id: string, position: number) => {
     console.error("Error reordering column:", err);
   }
 };
+
+export const deleteColumn = async (id: string) => {
+  try {
+    return await invoke<Column>("delete_column", { id });
+  } catch (err) {
+    console.log(err);
+  }
+};

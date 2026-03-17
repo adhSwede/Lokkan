@@ -1,9 +1,9 @@
 import { getTasksByColumnId } from "@queries/taskQueries";
-import { useSetTasks } from "@stores/taskStore";
+import { useTaskStore } from "@stores/taskStore";
 import { useEffect } from "react";
 
 export const useGetTasksByColumnId = (columnId?: string) => {
-  const setTasks = useSetTasks();
+  const setTasks = useTaskStore().setTasks;
 
   useEffect(() => {
     if (!columnId) {

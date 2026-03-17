@@ -12,9 +12,10 @@ interface ColumnState {
   reorderColumns: (from: number, to: number) => void;
 }
 
-const useColumnStore = create<ColumnState>((set) => ({
+export const useColumnStore = create<ColumnState>((set) => ({
   // States
   columns: [],
+
   // Setters
   setColumns: (columns) => set({ columns }),
 
@@ -33,12 +34,3 @@ const useColumnStore = create<ColumnState>((set) => ({
       return { columns: reordered };
     }),
 }));
-
-// Custom hooks
-export const useColumns = () => useColumnStore((state) => state.columns);
-export const useSetColumns = () => useColumnStore((state) => state.setColumns);
-export const useAddColumn = () => useColumnStore((state) => state.addColumn);
-export const useDeleteColumn = () =>
-  useColumnStore((state) => state.deleteColumn);
-export const useReorderColumns = () =>
-  useColumnStore((state) => state.reorderColumns);

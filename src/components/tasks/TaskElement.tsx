@@ -1,18 +1,18 @@
 import { invoke } from "@tauri-apps/api/core";
-import { deleteTask } from "@stores/taskStore";
+import { useTaskStore } from "@stores/taskStore";
 import { Card } from "@components/base/Card";
 import { Trash2 } from "lucide-react";
 import type { Task } from "@t/Task";
 
 export const TaskElement = ({ title, id }: Task) => {
-  const deleteTaskFromStore = deleteTask();
+  const { deleteTask } = useTaskStore();
 
   const deleteTaskElement = async (e: React.MouseEvent) => {
     e.stopPropagation();
 
     try {
       const task = await invoke<Task>("delete_task", { id });
-      deleteTaskFromStore(task);
+      deleteTask(task);
     } catch (err) {
       console.log(err);
     }

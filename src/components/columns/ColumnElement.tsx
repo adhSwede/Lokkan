@@ -1,8 +1,8 @@
 import { invoke } from "@tauri-apps/api/core";
-import { useDeleteColumn } from "@stores/columnStore";
+import { useColumnStore } from "@stores/columnStore";
 import { Card } from "@components/base/Card";
 import { Trash2 } from "lucide-react";
-import { useTasks } from "@stores/taskStore";
+import { useTaskStore } from "@stores/taskStore";
 import { AddTaskCard } from "@components/tasks/add/AddTaskCard";
 import type { Column } from "@t/Column";
 import { TaskSortable } from "@components/tasks/TaskSortable";
@@ -10,8 +10,8 @@ import { useGetTasksByColumnId } from "@hooks/taskHooks";
 import { TaskElement } from "@components/tasks/TaskElement";
 
 export const ColumnElement = ({ name, id }: Column) => {
-  const deleteColumn = useDeleteColumn();
-  const tasks = useTasks();
+  const { deleteColumn } = useColumnStore();
+  const { tasks } = useTaskStore();
 
   useGetTasksByColumnId(id);
 

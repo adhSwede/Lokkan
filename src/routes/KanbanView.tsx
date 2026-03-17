@@ -1,5 +1,4 @@
 import { useParams } from "react-router";
-import { useColumns } from "@stores/columnStore";
 import { useRef } from "react";
 import { ColumnElement } from "@components/columns/ColumnElement";
 import { AddColumnCard } from "@components/columns/add/AddColumnCard";
@@ -8,14 +7,15 @@ import {
   type DragEndEvent,
   type DragOverEvent,
 } from "@dnd-kit/react";
+import { useColumnStore } from "@stores/columnStore";
 import { useGetColsByBoardId, useReorderColumns } from "@hooks/columnHooks";
 import { ColumnSortable } from "@components/columns/ColumnSortable";
 
 export const KanbanView = () => {
   const { id } = useParams();
-  const columns = useColumns();
-  const reorderColumns = useReorderColumns();
   const lastOverId = useRef<string | null>(null);
+  const { columns } = useColumnStore();
+  const reorderColumns = useReorderColumns();
 
   useGetColsByBoardId(id);
 
@@ -30,12 +30,11 @@ export const KanbanView = () => {
   const handleDragEnd: DragEndEvent = (event) => {
     if (event.canceled || !lastOverId.current) return;
     const source = event.operation.source;
+
     if (!source || source.id === lastOverId.current) return;
-    const from = columns.findIndex((c) => c.id === source.id);
-    const to = columns.findIndex((c) => c.id === lastOverId.current);
+    const toId = lastOverId.current;
     lastOverId.current = null;
-    if (from === -1 || to === -1 || from === to) return;
-    reorderColumns(from, to);
+    reorderColumns(source.id as string, toId);
   };
 
   return (

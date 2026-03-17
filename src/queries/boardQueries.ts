@@ -13,3 +13,11 @@ export const getAllBoards = async () => {
     console.error("Error fetching boards:", err);
   }
 };
+
+export const createBoard = async (name: string) => {
+  try {
+    return await invoke<Board>("create_board", { name });
+  } catch (err) {
+    console.error("Error creating board:", err);
+  }
+};
