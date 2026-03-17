@@ -12,6 +12,12 @@ export const TaskSortable = ({
   children: ReactNode;
   group: string;
 }) => {
-  const { ref } = useSortable({ id, index, type: "item", group });
+  const { ref } = useSortable({
+    id,
+    index,
+    group,
+    type: "Task",
+    accept: "Task",
+  });
   return <div ref={ref}>{children}</div>;
 };
