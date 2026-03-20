@@ -16,3 +16,24 @@ export const useGetTasksByColumnId = (columnId?: string) => {
     });
   }, [setTasks, columnId]);
 };
+
+export const useReorderTask = (
+  id: string,
+  columnId: string,
+  position: number,
+) => {
+  const reorderTaskStore = useTaskStore().reorderTask;
+
+  if (!id) {
+    console.error("Failed to retrieve id.");
+    return;
+  }
+  if (!columnId) {
+    console.error("Failed to retrieve columnId.");
+    return;
+  }
+  if (!position) {
+    console.error("Failed to retrieve position.");
+    return;
+  }
+};

@@ -70,10 +70,10 @@ pub async fn reorder_task(
     let task = sqlx::query_file_as!(
         Task,
         "src/queries/tasks/reorder.sql",
-        id,
         column_id,
         position,
-        now
+        now,
+        id
     )
     .fetch_one(pool)
     .await?;
