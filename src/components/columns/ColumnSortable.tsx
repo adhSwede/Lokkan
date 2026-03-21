@@ -1,24 +1,34 @@
-import { useSortable } from "@dnd-kit/react/sortable";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import type { ReactNode } from "react";
+import type { Column } from "@t/Column";
 
 export const ColumnSortable = ({
   id,
-  index,
+  column,
   children,
-  group,
 }: {
   id: string;
-  index: number;
+  column: Column;
   children: ReactNode;
-  group: string;
 }) => {
-  const { ref } = useSortable({
+  const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
     id,
-    index,
-    group,
-    type: "Column",
-    accept: "Column",
+    data: { type: "Column", column },
   });
 
-  return <div ref={ref}>{children}</div>;
+  return (
+    <div
+      ref={setNodeRef}
+      style={{
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.5 : 1,
+      }}
+      {...attributes}
+      {...listeners}
+    >
+      {children}
+    </div>
+  );
 };

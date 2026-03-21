@@ -21,36 +21,30 @@ export const useGetTasksByColumnId = (columnId?: string) => {
 };
 
 export const useReorderTask = () => {
-  const { tasks, setTasksForColumns } = useTaskStore();
+  const { setTasksForColumns } = useTaskStore();
 
-  return async (fromId: string, toId: string, columnId: string) => {
-    const sourceTask = tasks.find((t) => t.id === fromId);
-    if (!sourceTask) return;
+  return async (finalColumnId: string, originalColumnId: string) => {
+    const { tasks } = useTaskStore.getState();
 
-    const columnTasks = tasks
-      .filter((t) => t.column_id === columnId && t.id !== fromId)
-      .toSorted((a, b) => a.position - b.position);
+    const affectedColumnIds = [...new Set([finalColumnId, originalColumnId])];
 
-    const to = columnTasks.findIndex((t) => t.id === toId);
-    if (to === -1) return;
+    for (const columnId of affectedColumnIds) {
+      const columnTasks = tasks
+        .filter((t) => t.column_id === columnId)
+        .toSorted((a, b) => a.position - b.position);
 
-    const reordered = [...columnTasks];
-    reordered.splice(to, 0, sourceTask);
-
-    for (let i = 0; i < reordered.length; i++) {
-      await reorderTaskQuery(reordered[i].id, columnId, i);
+      for (let i = 0; i < columnTasks.length; i++) {
+        await reorderTaskQuery(columnTasks[i].id, columnId, i);
+      }
     }
 
-    const [updatedTarget, updatedSource] = await Promise.all([
-      getTasksByColumnId(columnId),
-      sourceTask.column_id !== columnId
-        ? getTasksByColumnId(sourceTask.column_id)
-        : Promise.resolve(undefined),
-    ]);
+    const updates = await Promise.all(
+      affectedColumnIds.map(async (columnId) => {
+        const fetched = await getTasksByColumnId(columnId);
+        return fetched ? { columnId, tasks: fetched } : null;
+      })
+    );
 
-    const updates = [];
-    if (updatedTarget) updates.push({ columnId, tasks: updatedTarget });
-    if (updatedSource) updates.push({ columnId: sourceTask.column_id, tasks: updatedSource });
-    setTasksForColumns(updates);
+    setTasksForColumns(updates.filter((u) => u !== null));
   };
 };

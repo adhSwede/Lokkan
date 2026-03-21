@@ -8,6 +8,8 @@ import type { Column } from "@t/Column";
 import { TaskSortable } from "@components/tasks/TaskSortable";
 import { useGetTasksByColumnId } from "@hooks/taskHooks";
 import { TaskElement } from "@components/tasks/TaskElement";
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import { useDroppable } from "@dnd-kit/core";
 
 export const ColumnElement = ({ name, id }: Column) => {
   const { deleteColumn } = useColumnStore();
@@ -15,9 +17,14 @@ export const ColumnElement = ({ name, id }: Column) => {
 
   useGetTasksByColumnId(id);
 
+  const { setNodeRef } = useDroppable({ id, data: { type: "Column" } });
+
+  const columnTasks = tasks
+    .filter((t) => t.column_id === id)
+    .toSorted((a, b) => a.position - b.position);
+
   const deleteColumnElement = async (e: React.MouseEvent) => {
     e.stopPropagation();
-
     try {
       const column = await invoke<Column>("delete_column", { id });
       deleteColumn(column);
@@ -38,15 +45,14 @@ export const ColumnElement = ({ name, id }: Column) => {
             <Trash2 />
           </button>
         </div>
-        <div className="h-full w-full rounded shadow-(--card-shadow)">
-          {tasks
-            .filter((t) => t.column_id === id)
-            .toSorted((a, b) => a.position - b.position)
-            .map((task, index) => (
-              <TaskSortable key={task.id} id={task.id} index={index} group={id}>
+        <div ref={setNodeRef} className="h-full w-full rounded shadow-(--card-shadow)">
+          <SortableContext items={columnTasks.map((t) => t.id)} strategy={verticalListSortingStrategy}>
+            {columnTasks.map((task) => (
+              <TaskSortable key={task.id} task={task}>
                 <TaskElement {...task} />
               </TaskSortable>
             ))}
+          </SortableContext>
           {id && <AddTaskCard columnId={id} />}
         </div>
       </div>

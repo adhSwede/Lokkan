@@ -1,23 +1,38 @@
-import { useSortable } from "@dnd-kit/react/sortable";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import type { ReactNode } from "react";
+import type { Task } from "@t/Task";
 
 export const TaskSortable = ({
-  id,
-  index,
+  task,
   children,
-  group,
 }: {
-  id: string;
-  index: number;
+  task: Task;
   children: ReactNode;
-  group: string;
 }) => {
-  const { ref } = useSortable({
-    id,
-    index,
-    group,
-    type: "Task",
-    accept: "Task",
+  const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
+    id: task.id,
+    data: { type: "Task", task },
   });
-  return <div ref={ref}>{children}</div>;
+
+  if (isDragging) {
+    return (
+      <div
+        ref={setNodeRef}
+        style={{ transform: CSS.Transform.toString(transform), transition }}
+        className="opacity-30 rounded border-2 border-dashed border-white/30 h-16"
+      />
+    );
+  }
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={{ transform: CSS.Transform.toString(transform), transition }}
+      {...attributes}
+      {...listeners}
+    >
+      {children}
+    </div>
+  );
 };
