@@ -1,7 +1,8 @@
-import { useAddTask, useTasks, type Task } from "@stores/taskStore";
+import { useTaskStore } from "@stores/taskStore";
 import { invoke } from "@tauri-apps/api/core";
 import { X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { type Task } from "@t/Task";
 
 export const AddTaskForm = ({
   columnId,
@@ -11,8 +12,7 @@ export const AddTaskForm = ({
   onToggle: () => void;
 }) => {
   const inputField = useRef<HTMLInputElement>(null);
-  const addTask = useAddTask();
-  const tasks = useTasks();
+  const { addTask, tasks } = useTaskStore();
 
   useEffect(() => {
     inputField.current?.focus();

@@ -57,6 +57,7 @@ pub fn run() {
             // <== Columns ==>
             commands::column_commands::create_column,
             commands::column_commands::update_column,
+            commands::column_commands::reorder_column,
             commands::column_commands::get_all_columns,
             commands::column_commands::get_columns_by_board_id,
             commands::column_commands::get_column_by_id,
@@ -64,8 +65,10 @@ pub fn run() {
             // <== Tasks ==>
             commands::task_commands::create_task,
             commands::task_commands::update_task,
+            commands::task_commands::reorder_task,
             commands::task_commands::get_all_tasks,
             commands::task_commands::get_task_by_id,
+            commands::task_commands::get_tasks_by_column_id,
             commands::task_commands::delete_task,
         ])
         .run(tauri::generate_context!())

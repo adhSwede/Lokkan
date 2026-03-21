@@ -1,12 +1,11 @@
-import { invoke } from "@tauri-apps/api/core";
 import { X } from "lucide-react";
 import React, { useRef, useEffect, useState } from "react";
-import { useAddBoard, type Board } from "@stores/boardStore";
 import { useNavigate } from "react-router";
+import { useCreateBoard } from "@hooks/boardHooks";
 
 export const AddBoardForm = ({ onToggle }: { onToggle: () => void }) => {
+  const createBoard = useCreateBoard();
   const inputField = useRef<HTMLInputElement>(null);
-  const addBoard = useAddBoard();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,14 +16,12 @@ export const AddBoardForm = ({ onToggle }: { onToggle: () => void }) => {
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const board = await invoke<Board>("create_board", { name: inputValue });
-      addBoard(board);
-      onToggle();
-      navigate(`/boards/${board.id}`);
-    } catch (err) {
-      console.log(err);
-    }
+    createBoard(inputValue).then((board) => {
+      if (board) {
+        onToggle();
+        navigate(`/boards/${board.id}`);
+      }
+    });
   };
 
   return (

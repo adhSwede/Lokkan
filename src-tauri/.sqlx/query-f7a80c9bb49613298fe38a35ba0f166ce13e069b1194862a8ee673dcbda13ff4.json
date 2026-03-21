@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "-- get_by_board_id.sql\r\nSELECT\r\n    id as \"id!\",\r\n    board_id as \"board_id!\",\r\n    name as \"name!\",\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"\r\nFROM\r\n    columns\r\nWHERE\r\n    board_id = ?",
+  "query": "-- get_by_board_id.sql\r\nSELECT\r\n    id as \"id!\",\r\n    board_id as \"board_id!\",\r\n    name as \"name!\",\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"\r\nFROM\r\n    columns\r\nWHERE\r\n    board_id = ?\r\nORDER BY position ASC",
   "describe": {
     "columns": [
       {
@@ -46,5 +46,5 @@
       false
     ]
   },
-  "hash": "2f82c713ed8a4a8dde0b61b7650481bfebf1f51088e113de4d982b33ee427293"
+  "hash": "f7a80c9bb49613298fe38a35ba0f166ce13e069b1194862a8ee673dcbda13ff4"
 }

@@ -1,12 +1,13 @@
 import { Trash2 } from "lucide-react";
-import { useDeleteBoard, type Board } from "../../stores/boardStore";
+import { useBoardStore } from "../../stores/boardStore";
+import type { Board } from "@t/Board";
 import { Card } from "../base/Card";
 import { invoke } from "@tauri-apps/api/core";
 import { useNavigate } from "react-router";
 
 export const BoardElement = ({ name, id }: Board) => {
   const navigate = useNavigate();
-  const deleteBoard = useDeleteBoard();
+  const { deleteBoard } = useBoardStore();
 
   const deleteBoardElement = async (e: React.MouseEvent) => {
     e.stopPropagation();

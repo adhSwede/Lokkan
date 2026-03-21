@@ -53,6 +53,17 @@ pub async fn update_column(
     Ok(column)
 }
 
+pub async fn reorder_column(pool: &SqlitePool, id: &str, position: i64) -> Result<Column, Error> {
+    let now = chrono::Utc::now().to_rfc3339();
+
+    let column = sqlx::query_file_as!(Column, "src/queries/columns/reorder.sql", position, now, id)
+        .fetch_one(pool)
+        .await?;
+
+    println!("✓ Column updated.");
+    Ok(column)
+}
+
 // <================== Get ==================>
 pub async fn get_all_columns(pool: &SqlitePool) -> Result<Vec<Column>, Error> {
     let columns = sqlx::query_file_as!(Column, "src/queries/columns/get_all.sql")

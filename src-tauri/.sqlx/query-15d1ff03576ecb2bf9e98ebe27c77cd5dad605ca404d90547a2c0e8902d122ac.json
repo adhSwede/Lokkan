@@ -1,0 +1,56 @@
+{
+  "db_name": "SQLite",
+  "query": "-- reorder.sql\r\nUPDATE tasks\r\nSET\r\n    column_id = ?,\r\n    position = ?,\r\n    updated_at = ?\r\nWHERE\r\n    id = ? RETURNING id as \"id!\",\r\n    column_id as \"column_id!\",\r\n    title as \"title!\",\r\n    description,\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"",
+  "describe": {
+    "columns": [
+      {
+        "name": "id!",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "column_id!",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "title!",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "description",
+        "ordinal": 3,
+        "type_info": "Text"
+      },
+      {
+        "name": "position!",
+        "ordinal": 4,
+        "type_info": "Integer"
+      },
+      {
+        "name": "created_at!",
+        "ordinal": 5,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at!",
+        "ordinal": 6,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 4
+    },
+    "nullable": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "15d1ff03576ecb2bf9e98ebe27c77cd5dad605ca404d90547a2c0e8902d122ac"
+}

@@ -1,7 +1,8 @@
 import { invoke } from "@tauri-apps/api/core";
 import { X } from "lucide-react";
 import React, { useRef, useEffect, useState } from "react";
-import { useAddColumn, useColumns, type Column } from "@stores/columnStore";
+import { useColumnStore } from "@stores/columnStore";
+import { type Column } from "@t/Column";
 
 export const AddColumnForm = ({
   boardId,
@@ -11,8 +12,7 @@ export const AddColumnForm = ({
   onToggle: () => void;
 }) => {
   const inputField = useRef<HTMLInputElement>(null);
-  const addColumn = useAddColumn();
-  const columns = useColumns();
+  const { columns, addColumn } = useColumnStore();
 
   useEffect(() => {
     inputField.current?.focus();

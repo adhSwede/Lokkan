@@ -1,0 +1,50 @@
+{
+  "db_name": "SQLite",
+  "query": "-- reorder.sql\r\nUPDATE columns\r\nSET\r\n    position = ?,\r\n    updated_at = ?\r\nWHERE\r\n    id = ? RETURNING id as \"id!\",\r\n    board_id as \"board_id!\",\r\n    name as \"name!\",\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"",
+  "describe": {
+    "columns": [
+      {
+        "name": "id!",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "board_id!",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "name!",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "position!",
+        "ordinal": 3,
+        "type_info": "Integer"
+      },
+      {
+        "name": "created_at!",
+        "ordinal": 4,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at!",
+        "ordinal": 5,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "3f61b0e0a1c0b344eb4cb8265cc75e57a093ac72e963e822b820e5f3064f53d3"
+}

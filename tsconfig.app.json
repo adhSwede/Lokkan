@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ES2022",
+    "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "types": ["vite/client"],
     "skipLibCheck": true,
@@ -27,9 +27,14 @@
     /* Paths */
     "baseUrl": ".",
     "paths": {
+      "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
+      "@css/*": ["src/css/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@queries/*": ["src/queries/*"],
+      "@routes/*": ["src/routes/*"],
       "@stores/*": ["src/stores/*"],
-      "@routes/*": ["src/routes/*"]
+      "@t/*": ["src/types/*"]
     }
   },
   "include": ["src"]

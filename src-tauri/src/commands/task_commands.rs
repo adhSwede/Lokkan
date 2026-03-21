@@ -44,6 +44,18 @@ pub async fn update_task(
     .map_err(|e| e.to_string())
 }
 
+#[tauri::command]
+pub async fn reorder_task(
+    state: tauri::State<'_, AppState>,
+    id: String,
+    column_id: String,
+    position: i64,
+) -> Result<Task, String> {
+    tasks::reorder_task(&state.pool, &id, &column_id, position)
+        .await
+        .map_err(|e| e.to_string())
+}
+
 // <================== Get ==================>
 #[tauri::command]
 pub async fn get_all_tasks(state: tauri::State<'_, AppState>) -> Result<Vec<Task>, String> {
