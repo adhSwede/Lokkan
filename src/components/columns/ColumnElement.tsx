@@ -41,6 +41,7 @@ export const ColumnElement = ({ name, id }: Column) => {
         <div className="h-full w-full rounded shadow-(--card-shadow)">
           {tasks
             .filter((t) => t.column_id === id)
+            .toSorted((a, b) => a.position - b.position)
             .map((task, index) => (
               <TaskSortable key={task.id} id={task.id} index={index} group={id}>
                 <TaskElement {...task} />

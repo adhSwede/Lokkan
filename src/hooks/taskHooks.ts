@@ -1,4 +1,7 @@
-import { getTasksByColumnId } from "@queries/taskQueries";
+import {
+  getTasksByColumnId,
+  reorderTask as reorderTaskQuery,
+} from "@queries/taskQueries";
 import { useTaskStore } from "@stores/taskStore";
 import { useEffect } from "react";
 
@@ -17,23 +20,37 @@ export const useGetTasksByColumnId = (columnId?: string) => {
   }, [setTasks, columnId]);
 };
 
-export const useReorderTask = (
-  id: string,
-  columnId: string,
-  position: number,
-) => {
-  const reorderTaskStore = useTaskStore().reorderTask;
+export const useReorderTask = () => {
+  const { tasks, setTasksForColumns } = useTaskStore();
 
-  if (!id) {
-    console.error("Failed to retrieve id.");
-    return;
-  }
-  if (!columnId) {
-    console.error("Failed to retrieve columnId.");
-    return;
-  }
-  if (!position) {
-    console.error("Failed to retrieve position.");
-    return;
-  }
+  return async (fromId: string, toId: string, columnId: string) => {
+    const sourceTask = tasks.find((t) => t.id === fromId);
+    if (!sourceTask) return;
+
+    const columnTasks = tasks
+      .filter((t) => t.column_id === columnId && t.id !== fromId)
+      .toSorted((a, b) => a.position - b.position);
+
+    const to = columnTasks.findIndex((t) => t.id === toId);
+    if (to === -1) return;
+
+    const reordered = [...columnTasks];
+    reordered.splice(to, 0, sourceTask);
+
+    for (let i = 0; i < reordered.length; i++) {
+      await reorderTaskQuery(reordered[i].id, columnId, i);
+    }
+
+    const [updatedTarget, updatedSource] = await Promise.all([
+      getTasksByColumnId(columnId),
+      sourceTask.column_id !== columnId
+        ? getTasksByColumnId(sourceTask.column_id)
+        : Promise.resolve(undefined),
+    ]);
+
+    const updates = [];
+    if (updatedTarget) updates.push({ columnId, tasks: updatedTarget });
+    if (updatedSource) updates.push({ columnId: sourceTask.column_id, tasks: updatedSource });
+    setTasksForColumns(updates);
+  };
 };

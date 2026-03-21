@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "-- create.sql\nINSERT INTO\n    tasks (\n        id,\n        column_id,\n        title,\n        description,\n        position,\n        created_at,\n        updated_at\n    )\nVALUES\n    (?, ?, ?, ?, ?, ?, ?) RETURNING\n    id as \"id!\",\n    column_id as \"column_id!\",\n    title as \"title!\",\n    description,\n    position as \"position!\",\n    created_at as \"created_at!\",\n    updated_at as \"updated_at!\"\n",
+  "query": "-- reorder.sql\r\nUPDATE tasks\r\nSET\r\n    column_id = ?,\r\n    position = ?,\r\n    updated_at = ?\r\nWHERE\r\n    id = ? RETURNING id as \"id!\",\r\n    column_id as \"column_id!\",\r\n    title as \"title!\",\r\n    description,\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"",
   "describe": {
     "columns": [
       {
@@ -40,7 +40,7 @@
       }
     ],
     "parameters": {
-      "Right": 7
+      "Right": 4
     },
     "nullable": [
       true,
@@ -52,5 +52,5 @@
       false
     ]
   },
-  "hash": "e7ac05e46cf54eb3ea3ac76f299b7a4dd071a55d740d104e0b77b72192b19775"
+  "hash": "15d1ff03576ecb2bf9e98ebe27c77cd5dad605ca404d90547a2c0e8902d122ac"
 }

@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "-- get_by_board_id.sql\nSELECT\n    id as \"id!\",\n    board_id as \"board_id!\",\n    name as \"name!\",\n    position as \"position!\",\n    created_at as \"created_at!\",\n    updated_at as \"updated_at!\"\nFROM\n    columns\nWHERE\n    board_id = ?\nORDER BY position ASC",
+  "query": "-- create.sql\r\nINSERT INTO\r\n    columns (\r\n        id,\r\n        board_id,\r\n        name,\r\n        position,\r\n        created_at,\r\n        updated_at\r\n    )\r\nVALUES\r\n    (?, ?, ?, ?, ?, ?) RETURNING id as \"id!\",\r\n    board_id as \"board_id!\",\r\n    name as \"name!\",\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"",
   "describe": {
     "columns": [
       {
@@ -35,7 +35,7 @@
       }
     ],
     "parameters": {
-      "Right": 1
+      "Right": 6
     },
     "nullable": [
       true,
@@ -46,5 +46,5 @@
       false
     ]
   },
-  "hash": "f50ba63a023951b771104b89445792cab98462f44875efcef7ca2231c861d7ac"
+  "hash": "374ab6aff717fbb86ed96b2747fb2d7efdea08de863ffbeaa808747aed0b81c1"
 }

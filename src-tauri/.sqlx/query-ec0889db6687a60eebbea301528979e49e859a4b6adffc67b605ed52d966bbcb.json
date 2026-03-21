@@ -1,6 +1,6 @@
 {
   "db_name": "SQLite",
-  "query": "-- reorder.sql\nUPDATE columns\nSET\n    position = ?,\n    updated_at = ?\nWHERE\n    id = ? RETURNING id as \"id!\",\n    board_id as \"board_id!\",\n    name as \"name!\",\n    position as \"position!\",\n    created_at as \"created_at!\",\n    updated_at as \"updated_at!\"",
+  "query": "-- update.sql\r\nUPDATE columns\r\nSET\r\n    name = ?,\r\n    position = ?,\r\n    updated_at = ?\r\nWHERE\r\n    id = ? RETURNING\r\n    id as \"id!\",\r\n    board_id as \"board_id!\",\r\n    name as \"name!\",\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"\r\n",
   "describe": {
     "columns": [
       {
@@ -35,7 +35,7 @@
       }
     ],
     "parameters": {
-      "Right": 3
+      "Right": 4
     },
     "nullable": [
       true,
@@ -46,5 +46,5 @@
       false
     ]
   },
-  "hash": "62863ebc3026ec883c6baac6764c1f4f8e6572c538d2f2856b88c7bd896fe4f4"
+  "hash": "ec0889db6687a60eebbea301528979e49e859a4b6adffc67b605ed52d966bbcb"
 }
