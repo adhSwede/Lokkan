@@ -37,7 +37,7 @@ export const ColumnElement = ({ name, id }: Column) => {
   };
 
   return (
-    <Card className="flex w-50 bg-(--color-surface)/70">
+    <Card className="flex w-50 bg-(--color-surface)/35">
       <div className="flex h-full w-full flex-col justify-center p-3">
         <div className="relative flex w-full justify-center p-1 pb-4">
           <h2 className="text-xl">{name}</h2>
@@ -48,10 +48,7 @@ export const ColumnElement = ({ name, id }: Column) => {
             <Trash2 />
           </button>
         </div>
-        <div
-          ref={setNodeRef}
-          className="h-full w-full rounded shadow-(--card-shadow)"
-        >
+        <div ref={setNodeRef} className="flex h-full w-full flex-col gap-1">
           <SortableContext
             items={columnTasks.map((t) => t.id)}
             strategy={verticalListSortingStrategy}

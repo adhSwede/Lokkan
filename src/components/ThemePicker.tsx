@@ -15,21 +15,21 @@ const themeModules = import.meta.glob<Theme>("../themes/*.json", {
 
 const themes = Object.values(themeModules);
 
-function getDefaultThemeId(): string {
+const getDefaultThemeId = (): string => {
   const saved = localStorage.getItem("theme");
   if (saved && themes.some((t) => t.id === saved)) return saved;
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
     : "light";
-}
+};
 
-function applyTheme(theme: Theme) {
+const applyTheme = (theme: Theme) => {
   const root = document.documentElement;
   for (const [key, value] of Object.entries(theme.tokens)) {
     root.style.setProperty(key, value);
   }
   root.style.colorScheme = theme.colorScheme;
-}
+};
 
 export const ThemePicker = () => {
   const [activeId, setActiveId] = useState<string>(() => {

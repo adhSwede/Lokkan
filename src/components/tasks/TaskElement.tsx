@@ -19,7 +19,7 @@ export const TaskElement = ({ title, id }: Task) => {
   };
 
   return (
-    <Card>
+    <Card className="bg-(--color-surface)">
       <div className="flex w-full flex-col justify-center p-3">
         <div className="relative flex w-full justify-center p-1">
           <h3 className="text-lg">{title}</h3>
