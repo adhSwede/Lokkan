@@ -1,0 +1,14 @@
+{
+  "id": "gruvbox",
+  "label": "Gruvbox",
+  "swatch": "#282828",
+  "colorScheme": "dark",
+  "tokens": {
+    "--color-bg": "#282828",
+    "--color-surface": "#3c3836",
+    "--color-text": "#ebdbb2",
+    "--color-text-muted": "#928374",
+    "--color-hover": "rgba(235, 219, 178, 0.07)",
+    "--color-input": "rgba(235, 219, 178, 0.10)"
+  }
+}

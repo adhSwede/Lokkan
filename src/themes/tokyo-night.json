@@ -1,0 +1,14 @@
+{
+  "id": "tokyo-night",
+  "label": "Tokyo Night",
+  "swatch": "#1a1b26",
+  "colorScheme": "dark",
+  "tokens": {
+    "--color-bg": "#1a1b26",
+    "--color-surface": "#24283b",
+    "--color-text": "#c0caf5",
+    "--color-text-muted": "#565f89",
+    "--color-hover": "rgba(192, 202, 245, 0.07)",
+    "--color-input": "rgba(192, 202, 245, 0.10)"
+  }
+}

@@ -45,7 +45,7 @@ export const AddTaskForm = ({
         ref={inputField}
         onChange={(e) => setInputValue(e.target.value)}
         type="text"
-        className="rounded bg-black/10 p-1 px-2 dark:bg-white/10"
+        className="rounded p-1 px-2 bg-(--color-input)"
       />
     </form>
   );

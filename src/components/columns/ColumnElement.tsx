@@ -8,7 +8,10 @@ import type { Column } from "@t/Column";
 import { TaskSortable } from "@components/tasks/TaskSortable";
 import { useGetTasksByColumnId } from "@hooks/taskHooks";
 import { TaskElement } from "@components/tasks/TaskElement";
-import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { useDroppable } from "@dnd-kit/core";
 
 export const ColumnElement = ({ name, id }: Column) => {
@@ -34,7 +37,7 @@ export const ColumnElement = ({ name, id }: Column) => {
   };
 
   return (
-    <Card className="h-full">
+    <Card className="flex w-50 bg-(--color-surface)/70">
       <div className="flex h-full w-full flex-col justify-center p-3">
         <div className="relative flex w-full justify-center p-1 pb-4">
           <h2 className="text-xl">{name}</h2>
@@ -45,8 +48,14 @@ export const ColumnElement = ({ name, id }: Column) => {
             <Trash2 />
           </button>
         </div>
-        <div ref={setNodeRef} className="h-full w-full rounded shadow-(--card-shadow)">
-          <SortableContext items={columnTasks.map((t) => t.id)} strategy={verticalListSortingStrategy}>
+        <div
+          ref={setNodeRef}
+          className="h-full w-full rounded shadow-(--card-shadow)"
+        >
+          <SortableContext
+            items={columnTasks.map((t) => t.id)}
+            strategy={verticalListSortingStrategy}
+          >
             {columnTasks.map((task) => (
               <TaskSortable key={task.id} task={task}>
                 <TaskElement {...task} />

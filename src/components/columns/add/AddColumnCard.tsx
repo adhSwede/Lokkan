@@ -7,7 +7,7 @@ export const AddColumnCard = ({ boardId }: { boardId: string }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <Card className="h-1/10 w-full">
+    <Card className="h-1/10 w-50">
       {isEditing ? (
         <AddColumnForm
           boardId={boardId}

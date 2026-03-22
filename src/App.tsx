@@ -5,7 +5,7 @@ import { KanbanView } from "@routes/KanbanView";
 
 export const App = () => {
   return (
-    <div className="flex h-full w-full flex-col bg-white dark:bg-(--bg-dark) dark:text-white">
+    <div className="flex h-full w-full flex-col bg-(--color-bg) text-(--color-text)">
       <TitleBar />
 
       <div className="h-full p-3">

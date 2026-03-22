@@ -24,7 +24,7 @@ export const BoardElement = ({ name, id }: Board) => {
     <Card className="relative flex flex-1 items-center">
       <div
         onClick={() => navigate(`/boards/${id}`)}
-        className="flex flex-1 cursor-pointer p-3 px-3 hover:bg-black/5 dark:hover:bg-white/5"
+        className="flex flex-1 cursor-pointer p-3 px-3 hover:bg-(--color-hover)"
       >
         <div className="flex flex-1 items-center">
           <h2 className="max-w-9/10 text-lg wrap-anywhere">{name}</h2>

@@ -1,6 +1,6 @@
 import { Square, X, Minus } from "lucide-react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { DarkModeSwitch } from "./DarkModeSwitch";
+import { ThemePicker } from "./ThemePicker";
 
 export const TitleBar = () => {
   const appWindow = getCurrentWindow();
@@ -20,23 +20,24 @@ export const TitleBar = () => {
   return (
     <div
       data-tauri-drag-region
-      className="box-border flex items-center justify-between p-2.5 px-4 text-(--bg-dark) shadow select-none dark:text-white dark:shadow-white/10"
+      className="box-border flex items-center justify-between p-2.5 px-4 text-(--color-text) shadow select-none"
     >
       <span data-tauri-drag-region className="pointer-events-none">
         Lokkan
       </span>
       {/* Corner Icons */}
       <div className="box-border flex gap-6">
-        <DarkModeSwitch />
+        <ThemePicker />
+
         <button
           onClick={handleMinimize}
-          className="w-fit rounded p-1.5 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+          className="w-fit rounded p-1.5 transition-colors hover:bg-(--color-hover)"
         >
           <Minus className="pointer-events-none h-auto w-5" />
         </button>
         <button
           onClick={handleToggleMaximize}
-          className="w-fit rounded p-2 transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+          className="w-fit rounded p-2 transition-colors hover:bg-(--color-hover)"
         >
           <Square className="pointer-events-none h-auto w-4" />
         </button>
