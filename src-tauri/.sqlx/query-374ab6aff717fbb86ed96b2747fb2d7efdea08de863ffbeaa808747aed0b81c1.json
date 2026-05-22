@@ -1,0 +1,50 @@
+{
+  "db_name": "SQLite",
+  "query": "-- create.sql\r\nINSERT INTO\r\n    columns (\r\n        id,\r\n        board_id,\r\n        name,\r\n        position,\r\n        created_at,\r\n        updated_at\r\n    )\r\nVALUES\r\n    (?, ?, ?, ?, ?, ?) RETURNING id as \"id!\",\r\n    board_id as \"board_id!\",\r\n    name as \"name!\",\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"",
+  "describe": {
+    "columns": [
+      {
+        "name": "id!",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "board_id!",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "name!",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "position!",
+        "ordinal": 3,
+        "type_info": "Integer"
+      },
+      {
+        "name": "created_at!",
+        "ordinal": 4,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at!",
+        "ordinal": 5,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 6
+    },
+    "nullable": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "374ab6aff717fbb86ed96b2747fb2d7efdea08de863ffbeaa808747aed0b81c1"
+}

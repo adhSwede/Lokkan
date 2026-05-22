@@ -1,0 +1,44 @@
+{
+  "db_name": "SQLite",
+  "query": "-- get_all.sql\r\nSELECT\r\n    id as \"id!\",\r\n    name as \"name!\",\r\n    description,\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"\r\nFROM\r\n    boards\r\n",
+  "describe": {
+    "columns": [
+      {
+        "name": "id!",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "name!",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "description",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "created_at!",
+        "ordinal": 3,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at!",
+        "ordinal": 4,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 0
+    },
+    "nullable": [
+      true,
+      false,
+      true,
+      false,
+      false
+    ]
+  },
+  "hash": "51889762d7118f23571cfc108114b8c9b7e03306514b19d257c19d95bd6e17a3"
+}

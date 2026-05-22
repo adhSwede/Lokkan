@@ -1,0 +1,56 @@
+{
+  "db_name": "SQLite",
+  "query": "-- get_by_id.sql\r\nSELECT\r\n    id as \"id!\",\r\n    column_id as \"column_id!\",\r\n    title as \"title!\",\r\n    description,\r\n    position as \"position!\",\r\n    created_at as \"created_at!\",\r\n    updated_at as \"updated_at!\"\r\nFROM\r\n    tasks\r\nWHERE\r\n    id = ?\r\n",
+  "describe": {
+    "columns": [
+      {
+        "name": "id!",
+        "ordinal": 0,
+        "type_info": "Text"
+      },
+      {
+        "name": "column_id!",
+        "ordinal": 1,
+        "type_info": "Text"
+      },
+      {
+        "name": "title!",
+        "ordinal": 2,
+        "type_info": "Text"
+      },
+      {
+        "name": "description",
+        "ordinal": 3,
+        "type_info": "Text"
+      },
+      {
+        "name": "position!",
+        "ordinal": 4,
+        "type_info": "Integer"
+      },
+      {
+        "name": "created_at!",
+        "ordinal": 5,
+        "type_info": "Text"
+      },
+      {
+        "name": "updated_at!",
+        "ordinal": 6,
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Right": 1
+    },
+    "nullable": [
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "34cafdc6d5bef42d7192b1043fb1f64c0d5f8ba6c3aa90e9d9d58853c532b671"
+}
