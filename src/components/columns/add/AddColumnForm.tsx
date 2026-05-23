@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
-import { X } from "lucide-react";
-import React, { useRef, useEffect, useState } from "react";
+import { Check, X } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
 import { useColumnStore } from "@stores/columnStore";
 import { type Column } from "@t/Column";
 
@@ -20,7 +20,7 @@ export const AddColumnForm = ({
 
   const [inputValue, setInputValue] = useState("");
 
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const position = columns.length;
@@ -37,16 +37,29 @@ export const AddColumnForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative p-1">
-      <button type="button" onClick={onToggle} className="absolute left-3 top-1/2 -translate-y-1/2">
-        <X size={16} />
-      </button>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-1 p-1">
       <input
         ref={inputField}
         onChange={(e) => setInputValue(e.target.value)}
         type="text"
-        className="w-full rounded p-1 pl-8 bg-(--color-input)"
+        placeholder="Column name"
+        className="w-full rounded p-1 px-2 bg-(--color-input)"
       />
+      <div className="flex gap-1">
+        <button
+          type="submit"
+          className="cursor-pointer rounded p-1 hover:bg-(--color-hover)"
+        >
+          <Check size={16} />
+        </button>
+        <button
+          type="button"
+          onClick={onToggle}
+          className="cursor-pointer rounded p-1 hover:bg-(--color-hover)"
+        >
+          <X size={16} />
+        </button>
+      </div>
     </form>
   );
 };

@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useCreateBoard } from "@hooks/boardHooks";
@@ -26,18 +26,13 @@ export const AddBoardForm = ({ onToggle }: { onToggle: () => void }) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-1 p-1">
-      <div className="relative">
-        <button type="button" onClick={onToggle} className="absolute left-3 top-1/2 -translate-y-1/2">
-          <X size={16} />
-        </button>
-        <input
-          ref={inputField}
-          onChange={(e) => setNameValue(e.target.value)}
-          type="text"
-          placeholder="Name"
-          className="w-full rounded p-1 pl-8 bg-(--color-input)"
-        />
-      </div>
+      <input
+        ref={inputField}
+        onChange={(e) => setNameValue(e.target.value)}
+        type="text"
+        placeholder="Name"
+        className="w-full rounded p-1 px-2 bg-(--color-input)"
+      />
       <textarea
         value={descValue}
         onChange={(e) => setDescValue(e.target.value)}
@@ -45,6 +40,21 @@ export const AddBoardForm = ({ onToggle }: { onToggle: () => void }) => {
         rows={2}
         className="w-full resize-none rounded p-1 px-2 text-sm bg-(--color-input)"
       />
+      <div className="flex gap-1">
+        <button
+          type="submit"
+          className="cursor-pointer rounded p-1 hover:bg-(--color-hover)"
+        >
+          <Check size={16} />
+        </button>
+        <button
+          type="button"
+          onClick={onToggle}
+          className="cursor-pointer rounded p-1 hover:bg-(--color-hover)"
+        >
+          <X size={16} />
+        </button>
+      </div>
     </form>
   );
 };
