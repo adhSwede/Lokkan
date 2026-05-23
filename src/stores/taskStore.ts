@@ -11,6 +11,7 @@ interface TaskState {
   setTasksForColumns: (updates: { columnId: string; tasks: Task[] }[]) => void;
   setTasksOptimistic: (activeId: string, overId: string | null, overColumnId?: string) => void;
   addTask: (tasks: Task) => void;
+  updateTask: (task: Task) => void;
   deleteTask: (tasks: Task) => void;
   reorderTask: (taskId: string, columnId: string, position: number) => void;
 }
@@ -76,6 +77,11 @@ export const useTaskStore = create<TaskState>((set) => ({
     }),
 
   addTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
+
+  updateTask: (task) =>
+    set((state) => ({
+      tasks: state.tasks.map((t) => (t.id === task.id ? task : t)),
+    })),
 
   deleteTask: (task) =>
     set((state) => ({ tasks: state.tasks.filter((t) => t.id !== task.id) })),

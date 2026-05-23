@@ -1,5 +1,5 @@
 import { useBoardStore } from "@stores/boardStore";
-import { getAllBoards, createBoard } from "@queries/boardQueries";
+import { getAllBoards, createBoard, updateBoard as updateBoardQuery } from "@queries/boardQueries";
 import { useEffect } from "react";
 
 export const useGetAllBoards = () => {
@@ -15,9 +15,19 @@ export const useGetAllBoards = () => {
 export const useCreateBoard = () => {
   const { addBoard } = useBoardStore();
 
-  return (name: string) =>
-    createBoard(name).then((board) => {
+  return (name: string, description?: string) =>
+    createBoard(name, description).then((board) => {
       if (board) addBoard(board);
       return board;
     });
+};
+
+export const useUpdateBoard = () => {
+  const { updateBoard } = useBoardStore();
+
+  return async (id: string, name: string, description?: string) => {
+    const board = await updateBoardQuery(id, name, description);
+    if (board) updateBoard(board);
+    return board;
+  };
 };

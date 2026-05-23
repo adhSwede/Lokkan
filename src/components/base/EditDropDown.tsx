@@ -13,9 +13,10 @@ type EntityType = "column" | "task" | "board";
 interface Props {
   id: string;
   type: EntityType;
+  onEdit?: () => void;
 }
 
-export const EditDropDown = ({ id, type }: Props) => {
+export const EditDropDown = ({ id, type, onEdit }: Props) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -64,6 +65,16 @@ export const EditDropDown = ({ id, type }: Props) => {
       </button>
       {open && (
         <ul className="absolute right-0 z-50 mt-1 min-w-32 rounded border border-(--color-input) bg-(--color-surface) text-(--color-text) shadow-md">
+          {onEdit && (
+            <li>
+              <button
+                className="w-full cursor-pointer px-3 py-2 text-left text-sm hover:bg-(--color-hover)"
+                onClick={(e) => { e.stopPropagation(); setOpen(false); onEdit(); }}
+              >
+                Edit
+              </button>
+            </li>
+          )}
           <li>
             <button
               className="w-full cursor-pointer px-3 py-2 text-left text-sm text-red-500 hover:bg-(--color-hover)"

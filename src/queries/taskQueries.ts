@@ -17,6 +17,20 @@ export const getTasksByColumnId = async (columnId: string) => {
   }
 };
 
+export const updateTask = async (
+  id: string,
+  columnId: string,
+  title: string,
+  position: number,
+  description?: string,
+) => {
+  try {
+    return await invoke<Task>("update_task", { id, columnId, title, description, position });
+  } catch (err) {
+    console.error("Error updating task:", err);
+  }
+};
+
 export const reorderTask = async (
   id: string,
   columnId: string,
