@@ -1,6 +1,9 @@
 use crate::db::models::Board;
+use crate::repositories::columns::create_column;
 use sqlx::{Error, SqlitePool};
 use uuid::Uuid;
+
+const DEFAULT_COLUMNS: &[&str] = &["Todo", "In Progress", "On Hold", "Done"];
 
 // <================== Create ==================>
 pub async fn create_board(
@@ -23,7 +26,11 @@ pub async fn create_board(
     .fetch_one(pool)
     .await?;
 
-    println!("✓ Board created.");
+    for (i, name) in DEFAULT_COLUMNS.iter().enumerate() {
+        create_column(pool, name, &board.id, i as i64).await?;
+    }
+
+    println!("✓ Board created with default columns.");
     Ok(board)
 }
 
