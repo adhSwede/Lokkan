@@ -24,11 +24,11 @@ export const ColumnElement = ({ name, id }: Column) => {
     .toSorted((a, b) => a.position - b.position);
 
   return (
-    <Card className="flex w-50 bg-(--color-surface)/35">
-      <div className="flex h-full w-full flex-col justify-center p-3">
-        <div className="relative flex w-full justify-center p-1 pb-4">
-          <h2 className="w-full wrap-anywhere pr-8 text-center text-xl">{name}</h2>
-          <div className="absolute top-0 right-1">
+    <Card className="flex w-50 bg-(--color-surface)">
+      <div className="flex h-full w-full flex-col p-3">
+        <div className="relative mb-3 flex items-center">
+          <h2 className="w-full wrap-anywhere pr-8 text-lg">{name}</h2>
+          <div className="absolute top-0 right-0">
             <EditDropDown id={id} type="column" />
           </div>
         </div>

@@ -73,25 +73,17 @@ export const TaskElement = ({
   }
 
   return (
-    <Card className="bg-(--color-surface)">
-      <div className="relative flex min-w-0 flex-1 flex-col justify-center gap-1 p-2 px-3">
-        <div className="flex justify-center p-1">
-          <h3 className="flex pr-8 text-center text-lg wrap-anywhere">
-            {title}
-          </h3>
-          <div className="absolute top-1 right-1 flex">
-            <EditDropDown
-              id={id}
-              type="task"
-              onEdit={() => setIsEditing(true)}
-            />
-          </div>
-        </div>
+    <Card className="relative bg-(--color-bg)">
+      <div className="flex min-w-0 flex-1 flex-col gap-0.5 p-3 pr-8">
+        <h3 className="text-base wrap-anywhere">{title}</h3>
         {description && (
-          <span className="flex text-sm wrap-anywhere text-(--color-text-muted)">
+          <p className="text-sm wrap-anywhere text-(--color-text-muted)">
             {description}
-          </span>
+          </p>
         )}
+      </div>
+      <div className="absolute top-2 right-2">
+        <EditDropDown id={id} type="task" onEdit={() => setIsEditing(true)} />
       </div>
     </Card>
   );

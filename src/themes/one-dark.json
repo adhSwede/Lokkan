@@ -7,7 +7,7 @@
     "--color-bg": "#21252b",
     "--color-surface": "#2c313a",
     "--color-text": "#abb2bf",
-    "--color-text-muted": "#5c6370",
+    "--color-text-muted": "#8b939e",
     "--color-hover": "rgba(171, 178, 191, 0.07)",
     "--color-input": "rgba(171, 178, 191, 0.10)"
   }
