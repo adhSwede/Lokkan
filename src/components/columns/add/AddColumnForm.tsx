@@ -37,15 +37,15 @@ export const AddColumnForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-1 p-1">
-      <button type="button" onClick={onToggle}>
-        <X className="p-1" />
+    <form onSubmit={handleSubmit} className="relative p-1">
+      <button type="button" onClick={onToggle} className="absolute left-3 top-1/2 -translate-y-1/2">
+        <X size={16} />
       </button>
       <input
         ref={inputField}
         onChange={(e) => setInputValue(e.target.value)}
         type="text"
-        className="rounded p-1 px-2 bg-(--color-input)"
+        className="w-full rounded p-1 pl-8 bg-(--color-input)"
       />
     </form>
   );
