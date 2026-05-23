@@ -108,7 +108,7 @@ export const KanbanView = () => {
   };
 
   return (
-    <div className="grid h-full grid-cols-5 grid-rows-1 gap-3">
+    <div className="flex gap-3">
       {/* Context that keeps track of the dnd area. */}
       <DndContext
         sensors={sensors}
@@ -123,6 +123,7 @@ export const KanbanView = () => {
             </ColumnSortable>
           ))}
         </SortableContext>
+
         {createPortal(
           <DragOverlay>
             {activeColumn && <ColumnElement {...activeColumn} />}

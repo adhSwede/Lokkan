@@ -14,10 +14,18 @@ export const getAllBoards = async () => {
   }
 };
 
-export const createBoard = async (name: string) => {
+export const createBoard = async (name: string, description?: string) => {
   try {
-    return await invoke<Board>("create_board", { name });
+    return await invoke<Board>("create_board", { name, description });
   } catch (err) {
     console.error("Error creating board:", err);
+  }
+};
+
+export const updateBoard = async (id: string, name: string, description?: string) => {
+  try {
+    return await invoke<Board>("update_board", { id, name, description });
+  } catch (err) {
+    console.error("Error updating board:", err);
   }
 };

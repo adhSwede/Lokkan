@@ -1,9 +1,20 @@
 import {
   getTasksByColumnId,
   reorderTask as reorderTaskQuery,
+  updateTask as updateTaskQuery,
 } from "@queries/taskQueries";
 import { useTaskStore } from "@stores/taskStore";
 import { useEffect } from "react";
+
+export const useUpdateTask = () => {
+  const { updateTask } = useTaskStore();
+
+  return async (id: string, columnId: string, title: string, position: number, description?: string) => {
+    const task = await updateTaskQuery(id, columnId, title, position, description);
+    if (task) updateTask(task);
+    return task;
+  };
+};
 
 export const useGetTasksByColumnId = (columnId?: string) => {
   const setTasks = useTaskStore().setTasks;

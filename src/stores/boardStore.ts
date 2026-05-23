@@ -7,6 +7,7 @@ interface BoardState {
   // Setters
   setBoards: (boards: Board[]) => void;
   addBoard: (board: Board) => void;
+  updateBoard: (board: Board) => void;
   deleteBoard: (board: Board) => void;
 }
 
@@ -18,6 +19,11 @@ export const useBoardStore = create<BoardState>((set) => ({
   setBoards: (boards) => set({ boards }),
 
   addBoard: (board) => set((state) => ({ boards: [...state.boards, board] })),
+
+  updateBoard: (board) =>
+    set((state) => ({
+      boards: state.boards.map((b) => (b.id === board.id ? board : b)),
+    })),
 
   deleteBoard: (board) =>
     set((state) => ({ boards: state.boards.filter((b) => b.id !== board.id) })),

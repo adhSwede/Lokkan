@@ -1,0 +1,14 @@
+{
+  "id": "catppuccin",
+  "label": "Catppuccin",
+  "swatch": "#1e1e2e",
+  "colorScheme": "dark",
+  "tokens": {
+    "--color-bg": "#1e1e2e",
+    "--color-surface": "#313244",
+    "--color-text": "#cdd6f4",
+    "--color-text-muted": "#a6adc8",
+    "--color-hover": "rgba(205, 214, 244, 0.07)",
+    "--color-input": "rgba(205, 214, 244, 0.10)"
+  }
+}

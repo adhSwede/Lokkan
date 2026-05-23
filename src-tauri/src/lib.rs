@@ -1,27 +1,23 @@
 mod commands;
-mod config;
 mod db;
 mod repositories;
 mod sync;
 
 use anyhow::Context;
-use config::Config;
 use db::connection::create_pool;
 use db::schema::initialize_schema;
 use sqlx::SqlitePool;
+use std::path::PathBuf;
 use tauri::Manager;
 
 // <================== State ==================>
-/// A common state, to be passed around the app.
 pub struct AppState {
     pub pool: SqlitePool,
 }
 
 // <================== Init ==================>
-// To be initialized before start.
-async fn init() -> anyhow::Result<SqlitePool> {
-    let config = Config::from_env().context("Failed to load config")?;
-    let pool = create_pool(&config.db_path)
+async fn init(db_path: PathBuf) -> anyhow::Result<SqlitePool> {
+    let pool = create_pool(db_path)
         .await
         .context("Failed to create DB pool")?;
     initialize_schema(&pool)
@@ -31,10 +27,11 @@ async fn init() -> anyhow::Result<SqlitePool> {
 }
 
 // <================== Run ==================>
-/// Entry point, called from main.rs
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             if cfg!(debug_assertions) {
                 app.handle().plugin(
@@ -43,7 +40,13 @@ pub fn run() {
                         .build(),
                 )?;
             }
-            let pool = tauri::async_runtime::block_on(init())?;
+            let data_dir = app.path().document_dir()
+                .context("Failed to resolve documents directory")?
+                .join("Lokkan");
+            std::fs::create_dir_all(&data_dir)
+                .context("Failed to create Lokkan data directory")?;
+            let db_path = data_dir.join("lokkan.db");
+            let pool = tauri::async_runtime::block_on(init(db_path))?;
             app.manage(AppState { pool });
             Ok(())
         })

@@ -1,11 +1,8 @@
 import { useBoardStore } from "@stores/boardStore";
 import { BoardElement } from "@components/boards/BoardElement";
 import { AddBoardCard } from "@components/boards/add/AddBoardCard";
-import { useGetAllBoards } from "@hooks/boardHooks";
-
 export const BoardListView = () => {
   const { boards } = useBoardStore();
-  useGetAllBoards();
 
   return (
     <div className="grid grid-cols-5 gap-3">

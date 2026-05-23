@@ -9,13 +9,6 @@ export const Card = ({
   className?: string;
 }) => {
   return (
-    <div
-      className={twMerge(
-        "flex rounded-xs shadow-(--card-shadow) dark:text-white",
-        className,
-      )}
-    >
-      {children}
-    </div>
+    <div className={twMerge("flex rounded-lg", className)}>{children}</div>
   );
 };

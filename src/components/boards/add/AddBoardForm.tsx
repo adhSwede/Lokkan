@@ -1,5 +1,5 @@
-import { X } from "lucide-react";
-import React, { useRef, useEffect, useState } from "react";
+import { Check, X } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useCreateBoard } from "@hooks/boardHooks";
 
@@ -12,29 +12,49 @@ export const AddBoardForm = ({ onToggle }: { onToggle: () => void }) => {
     inputField.current?.focus();
   }, []);
 
-  const [inputValue, setInputValue] = useState("");
+  const [nameValue, setNameValue] = useState("");
+  const [descValue, setDescValue] = useState("");
 
-  const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createBoard(inputValue).then((board) => {
-      if (board) {
-        onToggle();
-        navigate(`/boards/${board.id}`);
-      }
-    });
+    const board = await createBoard(nameValue, descValue || undefined);
+    if (board) {
+      onToggle();
+      navigate(`/boards/${board.id}`);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-1 p-1">
-      <button type="button" onClick={onToggle}>
-        <X className="p-1" />
-      </button>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-1 p-1">
       <input
         ref={inputField}
-        onChange={(e) => setInputValue(e.target.value)}
+        onChange={(e) => setNameValue(e.target.value)}
         type="text"
-        className="rounded bg-black/10 p-1 px-2 dark:bg-white/10"
+        placeholder="Name"
+        className="w-full rounded p-1 px-2 bg-(--color-input)"
       />
+      <textarea
+        value={descValue}
+        onChange={(e) => setDescValue(e.target.value)}
+        placeholder="Description (optional)"
+        rows={2}
+        className="w-full resize-none rounded p-1 px-2 text-sm bg-(--color-input)"
+      />
+      <div className="flex gap-1">
+        <button
+          type="submit"
+          className="cursor-pointer rounded p-1 hover:bg-(--color-hover)"
+        >
+          <Check size={16} />
+        </button>
+        <button
+          type="button"
+          onClick={onToggle}
+          className="cursor-pointer rounded p-1 hover:bg-(--color-hover)"
+        >
+          <X size={16} />
+        </button>
+      </div>
     </form>
   );
 };

@@ -29,7 +29,7 @@ export const DarkModeSwitch = () => {
   return (
     <button
       onClick={toggle}
-      className="z-1 w-fit items-center rounded transition-colors hover:bg-gray-200 dark:hover:bg-gray-700"
+      className="z-1 w-fit items-center rounded transition-colors hover:bg-(--color-hover)"
       aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {dark ? (

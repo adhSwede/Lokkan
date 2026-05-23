@@ -7,7 +7,7 @@ export const AddTaskCard = ({ columnId }: { columnId: string }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <Card className="h-1/10 w-full">
+    <Card className="h-1/10">
       {isEditing ? (
         <AddTaskForm
           columnId={columnId}

@@ -1,0 +1,14 @@
+{
+  "id": "nord",
+  "label": "Nord",
+  "swatch": "#2e3440",
+  "colorScheme": "dark",
+  "tokens": {
+    "--color-bg": "#2e3440",
+    "--color-surface": "#3b4252",
+    "--color-text": "#d8dee9",
+    "--color-text-muted": "#4c566a",
+    "--color-hover": "rgba(216, 222, 233, 0.07)",
+    "--color-input": "rgba(216, 222, 233, 0.10)"
+  }
+}

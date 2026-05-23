@@ -6,12 +6,11 @@ Built with Rust and React, powered by Tauri.
 
 ## Status
 
-🚧 **In Development** - This is an exam project currently under active development.
+In development - exam project.
 
 ## Concept
 
 - **Local-first**: All data stored in SQLite on your machine
-- **Self-owned**: Optional GitHub sync puts your data in _your_ repository
 - **Offline-capable**: Works without internet connection
 - **Privacy-focused**: No external services, no telemetry
 
@@ -19,35 +18,28 @@ Built with Rust and React, powered by Tauri.
 
 - **Backend**: Rust + Tauri + SQLite + sqlx
 - **Frontend**: React + Vite + Tailwind CSS
-- **Drag & Drop**: @dnd-kit
-- **Sync**: GitHub (optional, planned)
+- **Drag and drop**: @dnd-kit
 
 ## Development Setup
 
 1. Install dependencies:
 
 ```bash
-   pnpm install
+pnpm install
 ```
 
-2. Copy environment config:
+2. Run development server:
 
 ```bash
-   cp .env.example .env
+pnpm tauri dev
 ```
 
-3. Run development server:
-
-```bash
-   pnpm tauri dev
-```
-
-The app will compile the Rust backend and start the Vite dev server automatically.
+The app will compile the Rust backend and start the Vite dev server automatically. The database and data directory are created automatically on first launch.
 
 ## Architecture
 
 - **Repositories**: Data access layer (SQLite CRUD operations)
-- **Commands**: Tauri command layer (bridges frontend ↔ backend)
+- **Commands**: Tauri command layer (bridges frontend and backend)
 - **Models**: Type-safe data structures shared between frontend and backend
 
 ## Roadmap
@@ -55,9 +47,10 @@ The app will compile the Rust backend and start the Vite dev server automaticall
 - [x] SQLite database with schema
 - [x] Full CRUD for boards, columns, and tasks
 - [x] Tauri commands wired up
-- [ ] Kanban UI with drag-and-drop
-- [ ] GitHub sync implementation
-- [ ] Settings/configuration UI
+- [x] Kanban UI with drag and drop
+- [x] Custom theming with user-defined themes
+- [ ] GitHub sync (planned)
+- [ ] Settings UI
 - [ ] First stable release
 
 ## License
