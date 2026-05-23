@@ -1,11 +1,11 @@
 {
   "id": "one-dark",
   "label": "One Dark",
-  "swatch": "#282c34",
+  "swatch": "#21252b",
   "colorScheme": "dark",
   "tokens": {
-    "--color-bg": "#282c34",
-    "--color-surface": "#21252b",
+    "--color-bg": "#21252b",
+    "--color-surface": "#2c313a",
     "--color-text": "#abb2bf",
     "--color-text-muted": "#5c6370",
     "--color-hover": "rgba(171, 178, 191, 0.07)",

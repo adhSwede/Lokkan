@@ -5,7 +5,7 @@
   "colorScheme": "dark",
   "tokens": {
     "--color-bg": "#1f2430",
-    "--color-surface": "#242936",
+    "--color-surface": "#2d3347",
     "--color-text": "#cccac2",
     "--color-text-muted": "#5c6773",
     "--color-hover": "rgba(204, 202, 194, 0.07)",

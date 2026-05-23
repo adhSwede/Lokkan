@@ -70,7 +70,7 @@ export const BoardElement = ({ name, description, id }: Board) => {
   }
 
   return (
-    <Card className="relative flex flex-1 items-center border border-t">
+    <Card className="relative flex flex-1 items-center border border-(--color-text-muted)">
       <div
         onClick={() => navigate(`/boards/${id}`)}
         className="flex flex-1 cursor-pointer p-3 px-3 hover:bg-(--color-hover)"
