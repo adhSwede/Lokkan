@@ -21,9 +21,7 @@ const bundledThemes = Object.values(themeModules);
 const getDefaultThemeId = (): string => {
   const saved = localStorage.getItem("theme");
   if (saved && bundledThemes.some((t) => t.id === saved)) return saved;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return "tokyo-night";
 };
 
 const applyTheme = (theme: Theme) => {
