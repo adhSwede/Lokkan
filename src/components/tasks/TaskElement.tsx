@@ -4,7 +4,13 @@ import { EditDropDown } from "@components/base/EditDropDown";
 import { useUpdateTask } from "@hooks/taskHooks";
 import { useEffect, useRef, useState } from "react";
 
-export const TaskElement = ({ title, description, id, column_id, position }: Task) => {
+export const TaskElement = ({
+  title,
+  description,
+  id,
+  column_id,
+  position,
+}: Task) => {
   const updateTask = useUpdateTask();
   const [isEditing, setIsEditing] = useState(false);
   const [titleValue, setTitleValue] = useState(title);
@@ -18,7 +24,13 @@ export const TaskElement = ({ title, description, id, column_id, position }: Tas
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    await updateTask(id, column_id, titleValue, position, descValue || undefined);
+    await updateTask(
+      id,
+      column_id,
+      titleValue,
+      position,
+      descValue || undefined,
+    );
     setIsEditing(false);
   };
 
@@ -30,13 +42,13 @@ export const TaskElement = ({ title, description, id, column_id, position }: Tas
             ref={titleRef}
             value={titleValue}
             onChange={(e) => setTitleValue(e.target.value)}
-            className="w-full rounded p-1 px-2 text-sm bg-(--color-input)"
+            className="w-full rounded bg-(--color-input) p-1 px-2 text-sm"
             placeholder="Title"
           />
           <textarea
             value={descValue}
             onChange={(e) => setDescValue(e.target.value)}
-            className="w-full resize-none rounded p-1 px-2 text-sm bg-(--color-input)"
+            className="w-full resize-none rounded bg-(--color-input) p-1 px-2 text-sm"
             placeholder="Description"
             rows={3}
           />
@@ -50,7 +62,7 @@ export const TaskElement = ({ title, description, id, column_id, position }: Tas
             </button>
             <button
               type="submit"
-              className="cursor-pointer rounded px-2 py-1 text-xs bg-(--color-input) hover:bg-(--color-hover)"
+              className="cursor-pointer rounded bg-(--color-input) px-2 py-1 text-xs hover:bg-(--color-hover)"
             >
               Save
             </button>
@@ -62,15 +74,23 @@ export const TaskElement = ({ title, description, id, column_id, position }: Tas
 
   return (
     <Card className="bg-(--color-surface)">
-      <div className="flex w-full flex-col justify-center p-3">
-        <div className="relative flex w-full justify-center p-1">
-          <h3 className="text-lg">{title}</h3>
-          <div className="absolute top-0 right-1">
-            <EditDropDown id={id} type="task" onEdit={() => setIsEditing(true)} />
+      <div className="relative flex min-w-0 flex-1 flex-col justify-center gap-1 p-2 px-3">
+        <div className="flex justify-center p-1">
+          <h3 className="flex pr-8 text-center text-lg wrap-anywhere">
+            {title}
+          </h3>
+          <div className="absolute top-1 right-1 flex">
+            <EditDropDown
+              id={id}
+              type="task"
+              onEdit={() => setIsEditing(true)}
+            />
           </div>
         </div>
         {description && (
-          <p className="px-1 text-sm text-(--color-text-muted)">{description}</p>
+          <span className="flex text-sm wrap-anywhere text-(--color-text-muted)">
+            {description}
+          </span>
         )}
       </div>
     </Card>

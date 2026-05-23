@@ -27,7 +27,7 @@ export const ColumnElement = ({ name, id }: Column) => {
     <Card className="flex w-50 bg-(--color-surface)/35">
       <div className="flex h-full w-full flex-col justify-center p-3">
         <div className="relative flex w-full justify-center p-1 pb-4">
-          <h2 className="text-xl">{name}</h2>
+          <h2 className="w-full wrap-anywhere pr-8 text-center text-xl">{name}</h2>
           <div className="absolute top-0 right-1">
             <EditDropDown id={id} type="column" />
           </div>

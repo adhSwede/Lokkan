@@ -26,7 +26,7 @@ export const TitleBar = () => {
   return (
     <div
       data-tauri-drag-region
-      className="box-border flex items-center justify-between p-2.5 px-4 text-(--color-text) shadow select-none"
+      className="box-border flex items-center justify-between border-b border-(--color-input) p-2.5 px-4 text-(--color-text) select-none"
     >
       <div className="flex items-center gap-2">
         <button
