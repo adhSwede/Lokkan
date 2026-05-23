@@ -36,27 +36,30 @@ export const BoardElement = ({ name, description, id }: Board) => {
             ref={nameRef}
             value={nameValue}
             onChange={(e) => setNameValue(e.target.value)}
-            className="w-full rounded p-1 px-2 text-sm bg-(--color-input)"
+            className="w-full rounded bg-(--color-input) p-1 px-2 text-sm"
             placeholder="Name"
           />
           <textarea
             value={descValue}
             onChange={(e) => setDescValue(e.target.value)}
-            className="w-full resize-none rounded p-1 px-2 text-sm bg-(--color-input)"
+            className="w-full resize-none rounded bg-(--color-input) p-1 px-2 text-sm"
             placeholder="Description"
             rows={2}
           />
           <div className="flex justify-end gap-2">
             <button
               type="button"
-              onClick={(e) => { e.stopPropagation(); setIsEditing(false); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsEditing(false);
+              }}
               className="cursor-pointer rounded px-2 py-1 text-xs hover:bg-(--color-hover)"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="cursor-pointer rounded px-2 py-1 text-xs bg-(--color-input) hover:bg-(--color-hover)"
+              className="cursor-pointer rounded bg-(--color-input) px-2 py-1 text-xs hover:bg-(--color-hover)"
             >
               Save
             </button>
@@ -67,7 +70,7 @@ export const BoardElement = ({ name, description, id }: Board) => {
   }
 
   return (
-    <Card className="relative flex flex-1 items-center">
+    <Card className="border/20 relative flex flex-1 items-center border">
       <div
         onClick={() => navigate(`/boards/${id}`)}
         className="flex flex-1 cursor-pointer p-3 px-3 hover:bg-(--color-hover)"
@@ -75,11 +78,16 @@ export const BoardElement = ({ name, description, id }: Board) => {
         <div className="flex flex-1 flex-col">
           <h2 className="max-w-9/10 text-lg wrap-anywhere">{name}</h2>
           {description && (
-            <p className="text-sm text-(--color-text-muted) wrap-anywhere">{description}</p>
+            <p className="text-sm wrap-anywhere text-(--color-text-muted)">
+              {description}
+            </p>
           )}
         </div>
       </div>
-      <div className="absolute top-2 right-2" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="absolute top-2 right-2"
+        onClick={(e) => e.stopPropagation()}
+      >
         <EditDropDown id={id} type="board" onEdit={() => setIsEditing(true)} />
       </div>
     </Card>

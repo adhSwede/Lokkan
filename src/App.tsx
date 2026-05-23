@@ -2,8 +2,11 @@ import { Route, Routes } from "react-router";
 import { TitleBar } from "@components/TitleBar";
 import { BoardListView } from "@routes/BoardListView";
 import { KanbanView } from "@routes/KanbanView";
+import { useGetAllBoards } from "@hooks/boardHooks";
 
 export const App = () => {
+  useGetAllBoards();
+
   return (
     <div className="flex h-full w-full flex-col bg-(--color-bg) text-(--color-text)">
       <TitleBar />
