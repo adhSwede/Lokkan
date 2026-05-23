@@ -19,10 +19,10 @@ export const App = () => {
   }, [location, boardMatch]);
 
   return (
-    <div className="flex h-full w-full flex-col bg-(--color-bg) text-(--color-text)">
+    <div className="flex h-screen w-full flex-col bg-(--color-bg) text-(--color-text)">
       <TitleBar />
 
-      <div className="h-full p-3">
+      <div className="flex-1 overflow-y-auto p-3">
         <Routes>
           <Route path="/" element={<BoardListView />} />
           <Route path="/boards/:id" element={<KanbanView />} />
