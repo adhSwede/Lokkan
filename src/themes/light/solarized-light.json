@@ -1,0 +1,14 @@
+{
+  "id": "solarized-light",
+  "label": "Solarized Light",
+  "swatch": "#fdf6e3",
+  "colorScheme": "light",
+  "tokens": {
+    "--color-bg": "#fdf6e3",
+    "--color-surface": "#eee8d5",
+    "--color-text": "#586e75",
+    "--color-text-muted": "#93a1a1",
+    "--color-hover": "rgba(88, 110, 117, 0.08)",
+    "--color-input": "rgba(88, 110, 117, 0.12)"
+  }
+}

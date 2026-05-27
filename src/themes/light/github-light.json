@@ -1,0 +1,14 @@
+{
+  "id": "github-light",
+  "label": "GitHub Light",
+  "swatch": "#ffffff",
+  "colorScheme": "light",
+  "tokens": {
+    "--color-bg": "#ffffff",
+    "--color-surface": "#f6f8fa",
+    "--color-text": "#1f2328",
+    "--color-text-muted": "#656d76",
+    "--color-hover": "rgba(31, 35, 40, 0.07)",
+    "--color-input": "rgba(31, 35, 40, 0.12)"
+  }
+}
