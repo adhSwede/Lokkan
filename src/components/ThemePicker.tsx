@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { readDir, readTextFile, writeTextFile, mkdir, exists } from "@tauri-apps/plugin-fs";
+import {
+  readDir,
+  readTextFile,
+  writeTextFile,
+  mkdir,
+  exists,
+} from "@tauri-apps/plugin-fs";
 import { documentDir, join } from "@tauri-apps/api/path";
 import { openPath } from "@tauri-apps/plugin-opener";
 
@@ -73,7 +79,9 @@ const loadUserThemes = async (): Promise<CategorizedTheme[]> => {
       if (entry.isDirectory) {
         const category = entry.name;
         const subEntries = await readDir(await join(themesDir, entry.name));
-        for (const file of subEntries.filter((e) => e.name?.endsWith(".json"))) {
+        for (const file of subEntries.filter((e) =>
+          e.name?.endsWith(".json"),
+        )) {
           try {
             const content = await readTextFile(
               await join(themesDir, entry.name, file.name!),
@@ -84,7 +92,10 @@ const loadUserThemes = async (): Promise<CategorizedTheme[]> => {
       } else if (entry.name?.endsWith(".json")) {
         try {
           const content = await readTextFile(await join(themesDir, entry.name));
-          results.push({ ...(JSON.parse(content) as Theme), category: "other" });
+          results.push({
+            ...(JSON.parse(content) as Theme),
+            category: "other",
+          });
         } catch {}
       }
     }
@@ -96,11 +107,11 @@ const loadUserThemes = async (): Promise<CategorizedTheme[]> => {
   }
 };
 
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
 const CATEGORY_ORDER = ["dark", "light"];
 
-const groupByCategory = (themes: CategorizedTheme[]): [string, CategorizedTheme[]][] => {
+const groupByCategory = (
+  themes: CategorizedTheme[],
+): [string, CategorizedTheme[]][] => {
   const map = new Map<string, CategorizedTheme[]>();
   for (const t of themes) {
     if (!map.has(t.category)) map.set(t.category, []);
@@ -135,7 +146,8 @@ export const ThemePicker = () => {
   const grouped = useMemo(() => groupByCategory(allThemes), [allThemes]);
 
   useEffect(() => {
-    if (open) seedDefaultThemes().then(() => loadUserThemes().then(setUserThemes));
+    if (open)
+      seedDefaultThemes().then(() => loadUserThemes().then(setUserThemes));
   }, [open]);
 
   // Apply theme whenever active id or theme list changes
@@ -159,9 +171,7 @@ export const ThemePicker = () => {
 
   const handleOpenFolder = async () => {
     try {
-      const themesDir = await getThemesDir();
-      await mkdir(themesDir, { recursive: true });
-      await openPath(themesDir);
+      await openPath(await getThemesDir());
     } catch (err) {
       console.error("Failed to open themes folder:", err);
     }
@@ -174,30 +184,47 @@ export const ThemePicker = () => {
         className="flex cursor-pointer items-center gap-1.5 rounded px-2 py-0.5 text-(--color-text)"
       >
         Theme
-        <svg className="h-3 w-3 opacity-60" viewBox="0 0 10 6" fill="currentColor"><path d="M0 0l5 6 5-6z"/></svg>
+        <svg
+          className="h-3 w-3 opacity-60"
+          viewBox="0 0 10 6"
+          fill="currentColor"
+        >
+          <path d="M0 0l5 6 5-6z" />
+        </svg>
       </button>
 
       {open && (
         <div className="absolute top-full right-0 z-50 mt-1 min-w-full rounded border border-(--color-input) bg-(--color-surface) text-(--color-text) shadow-lg">
           {grouped.map(([category, themes], gi) => (
             <div key={category}>
-              <div className={`px-3 py-1 text-xs font-semibold tracking-wide text-(--color-text-muted) uppercase${gi > 0 ? " border-t border-(--color-input)" : ""}`}>
-                {capitalize(category)}
+              <div
+                className={`px-3 py-1 text-xs font-semibold tracking-wide text-(--color-text-muted) uppercase${gi > 0 ? " border-t border-(--color-input)" : ""}`}
+              >
+                {category.charAt(0).toUpperCase() + category.slice(1)}
               </div>
               {themes.map((t) => (
                 <button
                   key={t.id}
                   onClick={() => {
-                    applyTheme(t);
                     setActiveId(t.id);
                     setOpen(false);
                   }}
                   className="flex w-full items-center gap-2 px-3 py-1.5 text-left hover:bg-(--color-hover)"
                 >
                   <span
-                    className="h-4 w-4 shrink-0 rounded-full"
-                    style={{ backgroundColor: t.swatch }}
-                  />
+                    className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border"
+                    style={{
+                      backgroundColor: t.swatch,
+                      borderColor: "var(--color-text)",
+                    }}
+                  >
+                    {t.id === activeId && (
+                      <span
+                        className="h-1 w-1 rounded-full"
+                        style={{ backgroundColor: t.tokens["--color-text"] }}
+                      />
+                    )}
+                  </span>
                   {t.label}
                 </button>
               ))}
