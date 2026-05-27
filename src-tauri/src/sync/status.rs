@@ -1,3 +1,4 @@
+// Reserved for GitHub sync - not yet wired up.
 pub enum SyncStatus {
     LocalNewer,
     RemoteNewer,
