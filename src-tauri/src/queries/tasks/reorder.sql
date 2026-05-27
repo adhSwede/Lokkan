@@ -5,10 +5,10 @@ SET
     position = ?,
     updated_at = ?
 WHERE
-    id = ? RETURNING id as "id!",
-    column_id as "column_id!",
-    title as "title!",
+    id = ? RETURNING id,
+    column_id,
+    title,
     description,
-    position as "position!",
-    created_at as "created_at!",
-    updated_at as "updated_at!"
+    position,
+    created_at,
+    updated_at
