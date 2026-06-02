@@ -3,8 +3,8 @@ INSERT INTO
     boards (id, name, description, created_at, updated_at)
 VALUES
     (?, ?, ?, ?, ?) RETURNING
-    id as "id!",
-    name as "name!",
+    id,
+    name,
     description,
-    created_at as "created_at!",
-    updated_at as "updated_at!"
+    created_at,
+    updated_at

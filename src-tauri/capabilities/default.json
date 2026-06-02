@@ -12,6 +12,8 @@
     "core:window:allow-start-dragging",
     "fs:allow-read-dir",
     "fs:allow-read-text-file",
+    "fs:allow-write-text-file",
+    "fs:allow-exists",
     "fs:allow-mkdir",
     "fs:scope-document-recursive",
     {

@@ -1,14 +1,22 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useLocation, useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useLocation, useMatch, useNavigate } from "react-router";
 
-export const NavArrows = ({ lastBoardId }: { lastBoardId: string | null }) => {
+export const NavArrows = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const match = useMatch("/boards/:id");
+  const [lastBoardId, setLastBoardId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (match?.params.id) setLastBoardId(match.params.id);
+  }, [location, match]);
+
   const canGoBack = location.pathname !== "/";
   const canGoForward = !canGoBack && !!lastBoardId;
 
   return (
-    <div className="fixed right-4 bottom-4 flex gap-1">
+    <div className="flex gap-1">
       <button
         onClick={() => canGoBack && navigate(-1)}
         disabled={!canGoBack}

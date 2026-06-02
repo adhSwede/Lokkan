@@ -1,6 +1,7 @@
 import { Square, X, Minus } from "lucide-react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { ThemePicker } from "./ThemePicker";
+import { NavArrows } from "./NavArrows";
 import { useMatch, useNavigate } from "react-router";
 import { useBoardStore } from "@stores/boardStore";
 
@@ -9,7 +10,9 @@ export const TitleBar = () => {
   const navigate = useNavigate();
   const match = useMatch("/boards/:id");
   const { boards } = useBoardStore();
-  const boardName = match ? boards.find((b) => b.id === match.params.id)?.name : null;
+  const boardName = match
+    ? boards.find((b) => b.id === match.params.id)?.name
+    : null;
 
   const handleMinimize = async () => {
     await appWindow.minimize();
@@ -26,9 +29,10 @@ export const TitleBar = () => {
   return (
     <div
       data-tauri-drag-region
-      className="box-border flex items-center justify-between p-2.5 px-4 text-(--color-text) shadow select-none"
+      className="box-border flex items-center justify-between border-b border-(--color-input) p-2.5 px-4 text-(--color-text) select-none"
     >
       <div className="flex items-center gap-2">
+        <NavArrows />
         <button
           onClick={() => navigate("/")}
           className="cursor-pointer rounded px-1 transition-opacity hover:opacity-60"
@@ -37,11 +41,14 @@ export const TitleBar = () => {
         </button>
         {boardName && (
           <>
-            <span className="pointer-events-none text-(--color-text-muted)">›</span>
+            <span className="pointer-events-none text-(--color-text-muted)">
+              ›
+            </span>
             <span className="text-(--color-text-muted)">{boardName}</span>
           </>
         )}
       </div>
+
       {/* Corner Icons */}
       <div className="box-border flex gap-6">
         <ThemePicker />

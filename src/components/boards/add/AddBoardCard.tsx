@@ -7,7 +7,7 @@ export const AddBoardCard = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <Card className="w-full">
+    <Card className="box-border min-h-20 w-full">
       {isEditing ? (
         <AddBoardForm onToggle={() => setIsEditing(!isEditing)} />
       ) : (
